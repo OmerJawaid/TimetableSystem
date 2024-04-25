@@ -186,7 +186,7 @@ extern "C" MainLibrary_API void signup(std::string username, std::string passwor
     }
 }*/
 
-extern "C" MainLibrary_API void login(std::string username, std::string password);/* {
+extern "C" MainLibrary_API bool login(std::string username, std::string password);/* {
     ifstream infile("users.txt");
     string user, pass;
     bool found = false;
