@@ -5,7 +5,7 @@ using namespace System::Windows::Forms;
 int main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	TimetableSystem::Login form;
+	TimetableSystem::MyForm1 form;
 	Application::Run(% form);
 }
 
