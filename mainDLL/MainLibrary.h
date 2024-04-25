@@ -51,7 +51,7 @@ public:
     int getCourseCode() const;
     Teacher* getTeacher() const;
     Room* getAssignedRoom() const;
-    /*Section* getAssignedSection() const;*/
+    Section* getAssignedSection() const { return assignedSection; }
     void setAssignedSection(Section* section) {
         assignedSection = section;
     }
