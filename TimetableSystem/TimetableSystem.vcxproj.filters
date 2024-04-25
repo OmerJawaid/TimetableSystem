@@ -26,7 +26,7 @@
     <ClInclude Include="singup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Login.h">
+    <ClInclude Include="MyForm1.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Signup1.h">
