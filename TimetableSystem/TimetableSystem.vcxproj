@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -121,9 +121,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Login.cpp" />
+    <ClCompile Include="Signup1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Login.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Signup1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="singup.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -135,6 +142,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Signup1.resx">
+      <DependentUpon>Signup1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="singup.resx">
+      <DependentUpon>singup.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

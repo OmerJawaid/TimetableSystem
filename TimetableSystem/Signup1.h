@@ -10,12 +10,12 @@ namespace TimetableSystem {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for MyForm1
+	/// Summary for Signup
 	/// </summary>
-	public ref class MyForm1 : public System::Windows::Forms::Form
+	public ref class Signup : public System::Windows::Forms::Form
 	{
 	public:
-		MyForm1(void)
+		Signup(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace TimetableSystem {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~MyForm1()
+		~Signup()
 		{
 			if (components)
 			{
@@ -37,27 +37,15 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::Label^ label4;
 	protected:
 	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
-
-	protected:
-
-
-
-
-
-
-
-
-
-
 
 	private:
 		/// <summary>
@@ -72,21 +60,18 @@ namespace TimetableSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm1::typeid));
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label4
@@ -95,38 +80,28 @@ namespace TimetableSystem {
 			this->label4->BackColor = System::Drawing::SystemColors::MenuBar;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(106, 55);
+			this->label4->Location = System::Drawing::Point(113, 48);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(565, 37);
-			this->label4->TabIndex = 18;
+			this->label4->TabIndex = 21;
 			this->label4->Text = L"Bahria University TimeTable System";
+			this->label4->Click += gcnew System::EventHandler(this, &Signup::label4_Click);
 			// 
 			// panel1
 			// 
 			this->panel1->BackColor = System::Drawing::SystemColors::MenuBar;
-			this->panel1->Controls->Add(this->pictureBox2);
+			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->label5);
 			this->panel1->Controls->Add(this->linkLabel1);
 			this->panel1->Controls->Add(this->textBox3);
 			this->panel1->Controls->Add(this->button1);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
-			this->panel1->Controls->Add(this->pictureBox3);
 			this->panel1->Controls->Add(this->textBox2);
-			this->panel1->Location = System::Drawing::Point(207, 166);
+			this->panel1->Location = System::Drawing::Point(220, 146);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(307, 264);
-			this->panel1->TabIndex = 17;
-			// 
-			// pictureBox2
-			// 
-			this->pictureBox2->BackColor = System::Drawing::SystemColors::MenuBar;
-			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
-			this->pictureBox2->Location = System::Drawing::Point(12, 55);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(22, 20);
-			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox2->TabIndex = 8;
-			this->pictureBox2->TabStop = false;
+			this->panel1->Size = System::Drawing::Size(307, 299);
+			this->panel1->TabIndex = 20;
 			// 
 			// linkLabel1
 			// 
@@ -135,34 +110,34 @@ namespace TimetableSystem {
 			this->linkLabel1->DisabledLinkColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->linkLabel1->LinkColor = System::Drawing::Color::DimGray;
-			this->linkLabel1->Location = System::Drawing::Point(103, 234);
+			this->linkLabel1->Location = System::Drawing::Point(87, 273);
 			this->linkLabel1->Name = L"linkLabel1";
-			this->linkLabel1->Size = System::Drawing::Size(102, 13);
+			this->linkLabel1->Size = System::Drawing::Size(127, 13);
 			this->linkLabel1->TabIndex = 10;
 			this->linkLabel1->TabStop = true;
-			this->linkLabel1->Text = L"create new account";
+			this->linkLabel1->Text = L"Already have an Account";
 			this->linkLabel1->VisitedLinkColor = System::Drawing::Color::Black;
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(54, 129);
+			this->textBox3->Location = System::Drawing::Point(32, 125);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(229, 20);
 			this->textBox3->TabIndex = 4;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(120, 176);
+			this->button1->Location = System::Drawing::Point(117, 236);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 5;
-			this->button1->Text = L"Login";
+			this->button1->Text = L"Signup";
 			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(51, 26);
+			this->label3->Location = System::Drawing::Point(29, 22);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(55, 13);
 			this->label3->TabIndex = 7;
@@ -171,25 +146,15 @@ namespace TimetableSystem {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(51, 103);
+			this->label2->Location = System::Drawing::Point(31, 95);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(53, 13);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Password";
 			// 
-			// pictureBox3
-			// 
-			this->pictureBox3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.Image")));
-			this->pictureBox3->Location = System::Drawing::Point(12, 129);
-			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(22, 20);
-			this->pictureBox3->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox3->TabIndex = 9;
-			this->pictureBox3->TabStop = false;
-			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(54, 55);
+			this->textBox2->Location = System::Drawing::Point(32, 50);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(229, 20);
 			this->textBox2->TabIndex = 1;
@@ -199,30 +164,46 @@ namespace TimetableSystem {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(323, 116);
+			this->label1->Location = System::Drawing::Point(330, 109);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(62, 24);
-			this->label1->TabIndex = 16;
-			this->label1->Text = L"Login";
+			this->label1->Size = System::Drawing::Size(76, 24);
+			this->label1->TabIndex = 19;
+			this->label1->Text = L"Signup";
 			// 
-			// MyForm1
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(31, 166);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(98, 13);
+			this->label5->TabIndex = 11;
+			this->label5->Text = L"Re-Enter Password";
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(32, 192);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(229, 20);
+			this->textBox1->TabIndex = 12;
+			// 
+			// Signup
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(777, 485);
+			this->ClientSize = System::Drawing::Size(791, 470);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
-			this->Name = L"MyForm1";
-			this->Text = L"MyForm1";
+			this->Name = L"Signup";
+			this->Text = L"Signup";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

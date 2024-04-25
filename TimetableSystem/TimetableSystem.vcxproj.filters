@@ -18,9 +18,18 @@
     <ClCompile Include="Login.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Signup1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="singup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Login.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Signup1.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
