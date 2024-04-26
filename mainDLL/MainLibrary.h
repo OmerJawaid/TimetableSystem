@@ -174,24 +174,6 @@ public:
 };
 
 
-extern "C" MainLibrary_API bool signup(std::string username, std::string password); /*{
-    ofstream outfile("users.txt", ios::app);
-    if (outfile.is_open()) {
-        outfile << username << " " << password << endl;
-        cout << "Signup Successful!" << endl;
-        outfile.close();
-    }
-    else {
-        cerr << "Error: Unable to open database file!" << endl;
-    }
-}*/
+extern "C" MainLibrary_API bool signup(std::string username, std::string password);
 
-extern "C" MainLibrary_API bool login(std::string username, std::string password);/* {
-    ifstream infile("users.txt");
-    string user, pass;
-    bool found = false;
-    if (infile.is_open()) {
-        while (infile >> user >> pass) {
-            if (user == username && pass == password)
-        }
-    }*/
+extern "C" MainLibrary_API bool login(std::string username, std::string password);

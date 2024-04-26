@@ -177,6 +177,7 @@ namespace TimetableSystem {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(229, 20);
 			this->textBox2->TabIndex = 1;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &Signup::textBox2_TextChanged);
 			// 
 			// label1
 			// 
@@ -227,7 +228,9 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		f1->ShowDialog();*/
 	}
 	else
-		MessageBox::Show("not successful");
+		MessageBox::Show("Unable to open file");
+}
+private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
