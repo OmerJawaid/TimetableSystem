@@ -1,5 +1,6 @@
 #pragma once
 #include "Signup1.h"
+#include"menu.h"
 #include"../mainDll/MainLibrary.h"
 #include <msclr/marshal_cppstd.h>
 
@@ -253,8 +254,12 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
 	flag=login(username, password);
-	if (flag==true)
+	if (flag == true) {
 		MessageBox::Show("Login Successful");
+		this->Hide();
+		menu ^obj1 = gcnew menu();
+		obj1->ShowDialog();
+	}
 	else
 		MessageBox::Show("not successful");
 }
