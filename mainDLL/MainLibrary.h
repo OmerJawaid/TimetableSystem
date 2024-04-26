@@ -56,9 +56,9 @@ public:
         assignedSection = section;
     }
 
-    Section* getAssignedSection() const {
+  /*  Section* getAssignedSection() const {
         return assignedSection;
-    }
+    }*/
     Time* getAssignedTime() const;
     /*void setAssignedSection(Section* section);*/
     void setAssignedRoom(Room* room);
@@ -174,7 +174,7 @@ public:
 };
 
 
-extern "C" MainLibrary_API void signup(std::string username, std::string password); /*{
+extern "C" MainLibrary_API bool signup(std::string username, std::string password); /*{
     ofstream outfile("users.txt", ios::app);
     if (outfile.is_open()) {
         outfile << username << " " << password << endl;

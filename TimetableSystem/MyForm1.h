@@ -1,4 +1,7 @@
 #pragma once
+#include "Signup1.h"
+#include"../mainDll/MainLibrary.h"
+#include <msclr/marshal_cppstd.h>
 
 namespace TimetableSystem {
 
@@ -46,6 +49,7 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
+
 
 	protected:
 
@@ -100,6 +104,7 @@ namespace TimetableSystem {
 			this->label4->Size = System::Drawing::Size(565, 37);
 			this->label4->TabIndex = 18;
 			this->label4->Text = L"Bahria University TimeTable System";
+			this->label4->Click += gcnew System::EventHandler(this, &MyForm1::label4_Click);
 			// 
 			// panel1
 			// 
@@ -142,6 +147,7 @@ namespace TimetableSystem {
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"create new account";
 			this->linkLabel1->VisitedLinkColor = System::Drawing::Color::Black;
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &MyForm1::linkLabel1_LinkClicked);
 			// 
 			// textBox3
 			// 
@@ -149,6 +155,7 @@ namespace TimetableSystem {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(229, 20);
 			this->textBox3->TabIndex = 4;
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm1::textBox3_TextChanged);
 			// 
 			// button1
 			// 
@@ -158,6 +165,7 @@ namespace TimetableSystem {
 			this->button1->TabIndex = 5;
 			this->button1->Text = L"Login";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm1::button1_Click);
 			// 
 			// label3
 			// 
@@ -193,6 +201,7 @@ namespace TimetableSystem {
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(229, 20);
 			this->textBox2->TabIndex = 1;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &MyForm1::textBox2_TextChanged);
 			// 
 			// label1
 			// 
@@ -223,6 +232,31 @@ namespace TimetableSystem {
 			this->PerformLayout();
 
 		}
+		
 #pragma endregion
-	};
+	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+		this->Hide();
+		Signup signup;
+		signup.ShowDialog();
+	}
+		  
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	bool flag=false;
+	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
+	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
+	flag=login(username, password);
+	if (flag==true)
+		MessageBox::Show("Login Successful");
+	else
+		MessageBox::Show("not successful");
+}
+};
 }

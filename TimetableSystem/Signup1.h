@@ -1,5 +1,6 @@
 #pragma once
-
+#include "../mainDLL/MainLibrary.h"
+#include <msclr/marshal_cppstd.h>
 namespace TimetableSystem {
 
 	using namespace System;
@@ -62,6 +63,8 @@ namespace TimetableSystem {
 		{
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -69,8 +72,6 @@ namespace TimetableSystem {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -103,6 +104,22 @@ namespace TimetableSystem {
 			this->panel1->Size = System::Drawing::Size(307, 299);
 			this->panel1->TabIndex = 20;
 			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(32, 192);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(229, 20);
+			this->textBox1->TabIndex = 12;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(31, 166);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(98, 13);
+			this->label5->TabIndex = 11;
+			this->label5->Text = L"Re-Enter Password";
+			// 
 			// linkLabel1
 			// 
 			this->linkLabel1->ActiveLinkColor = System::Drawing::SystemColors::ControlDarkDark;
@@ -117,6 +134,7 @@ namespace TimetableSystem {
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"Already have an Account";
 			this->linkLabel1->VisitedLinkColor = System::Drawing::Color::Black;
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &Signup::linkLabel1_LinkClicked);
 			// 
 			// textBox3
 			// 
@@ -133,6 +151,7 @@ namespace TimetableSystem {
 			this->button1->TabIndex = 5;
 			this->button1->Text = L"Signup";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Signup::button1_Click);
 			// 
 			// label3
 			// 
@@ -169,22 +188,7 @@ namespace TimetableSystem {
 			this->label1->Size = System::Drawing::Size(76, 24);
 			this->label1->TabIndex = 19;
 			this->label1->Text = L"Signup";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(31, 166);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(98, 13);
-			this->label5->TabIndex = 11;
-			this->label5->Text = L"Re-Enter Password";
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(32, 192);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(229, 20);
-			this->textBox1->TabIndex = 12;
+			this->label1->Click += gcnew System::EventHandler(this, &Signup::label1_Click);
 			// 
 			// Signup
 			// 
@@ -205,5 +209,25 @@ namespace TimetableSystem {
 #pragma endregion
 	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+	this->Hide();
+	
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	bool flag = false;
+	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
+	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
+	flag=signup(username, password);
+	if (flag)
+	{
+		MessageBox::Show("Signup Successful");
+		/*MyForm1^ f1 = gcnew MyForm1();
+		f1->ShowDialog();*/
+	}
+	else
+		MessageBox::Show("not successful");
+}
 };
 }

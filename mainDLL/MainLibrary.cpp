@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MainLibrary.h"
 #include<algorithm>
+
 using namespace std;
 
 void print_my_name()
@@ -15,28 +16,34 @@ const char* get_my_name()
 
 bool login(string username, string password)
 {
+  /*  if (username == "Omer" && password == "123")
+        return true;*/
     ifstream infile("users.txt");
     string user, pass;
     bool found = false;
+    
     if (infile.is_open()) {
         while (infile >> user >> pass) {
             if (user == username && pass == password)
-            {
-                infile.close();
-                return true;
-            }
+                found=true;
+            else
+                found=false;
         }
         infile.close();
+        return found;
     }
+    else
+        return false;
 }
 
-void signup(string username, string password)
+bool signup(string username, string password)
 {
 	ofstream outfile("users.txt", ios::app);
 	if (outfile.is_open()) {
 		outfile << username << " " << password << endl;
 		/*cout << "Signup Successful!" << endl;*/
 		outfile.close();
+        return true;
 	}
 	else {
 		/*cerr << "Error: Unable to open database file!" << endl;*/
@@ -379,7 +386,7 @@ void signup(string username, string password)
                                 Course* course = get<0>(het);
                             
                                 // Assuming each tuple contains the same section, get the section from any tuple
-                                section = course->getAssignedSection();
+                                /*section = course->getAssignedSection();*/
                                 break;
                             }
                             break;
