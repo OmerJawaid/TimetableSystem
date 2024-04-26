@@ -125,9 +125,6 @@
     <ClCompile Include="Signup1.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menu.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="MyForm1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -144,9 +141,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="menu.resx">
-      <DependentUpon>menu.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MyForm1.resx">
       <DependentUpon>MyForm1.h</DependentUpon>
     </EmbeddedResource>

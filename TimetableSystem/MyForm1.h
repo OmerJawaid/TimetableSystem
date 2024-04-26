@@ -257,8 +257,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	if (flag == true) {
 		MessageBox::Show("Login Successful");
 		this->Hide();
-		menu ^obj1 = gcnew menu();
-		obj1->ShowDialog();
+		/*menu ^obj1 = gcnew menu();
+		obj1->ShowDialog();*/
 	}
 	else
 		MessageBox::Show("not successful");
