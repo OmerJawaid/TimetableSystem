@@ -21,7 +21,8 @@
     <ClCompile Include="Signup1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="menu.cpp">
+
+    <ClCompile Include="Dashboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -33,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Signup1.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dashboard.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,18 +6,15 @@ using namespace std;
 
 void print_my_name()
 {
-   /* cout << "My name is Amaan." << std::endl;*/
+   
 }
 
 const char* get_my_name()
 {
     return "My name is Amaan.";
 }
-
 bool login(string username, string password)
 {
-  /*  if (username == "Omer" && password == "123")
-        return true;*/
     ifstream infile("users.txt");
     string user, pass;
     bool found = false;
@@ -41,12 +38,11 @@ bool signup(string username, string password)
 	ofstream outfile("users.txt", ios::app);
 	if (outfile.is_open()) {
 		outfile << username << " " << password << endl;
-		/*cout << "Signup Successful!" << endl;*/
 		outfile.close();
         return true;
 	}
 	else {
-		/*cerr << "Error: Unable to open database file!" << endl;*/
+        return false;
 	}
 }
 

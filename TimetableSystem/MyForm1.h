@@ -3,6 +3,7 @@
 //#include"menu.h"
 #include"../mainDll/MainLibrary.h"
 #include <msclr/marshal_cppstd.h>
+#include"Dashboard.h"
 
 namespace TimetableSystem {
 
@@ -50,6 +51,8 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::PictureBox^ pictureBox3;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label5;
+	private: System::Windows::Forms::Label^ label6;
 
 
 	protected:
@@ -89,6 +92,8 @@ namespace TimetableSystem {
 			this->pictureBox3 = (gcnew System::Windows::Forms::PictureBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox3))->BeginInit();
@@ -215,16 +220,36 @@ namespace TimetableSystem {
 			this->label1->TabIndex = 16;
 			this->label1->Text = L"Login";
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(330, 463);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(0, 13);
+			this->label5->TabIndex = 19;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(350, 451);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(0, 13);
+			this->label6->TabIndex = 20;
+			this->label6->Click += gcnew System::EventHandler(this, &MyForm1::label6_Click);
+			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(777, 485);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
 			this->Name = L"MyForm1";
 			this->Text = L"MyForm1";
+			this->Load += gcnew System::EventHandler(this, &MyForm1::MyForm1_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -254,14 +279,23 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
 	flag=login(username, password);
+
 	if (flag == true) {
 		MessageBox::Show("Login Successful");
 		this->Hide();
 		/*menu ^obj1 = gcnew menu();
 		obj1->ShowDialog();*/
+	Dashboard^ f1 = gcnew Dashboard();
+	f1->ShowDialog();
 	}
 	else
 		MessageBox::Show("not successful");
+}
+private: System::Void MyForm1_Load(System::Object^ sender, System::EventArgs^ e) {
+
+}
+private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 }
 };
 }
