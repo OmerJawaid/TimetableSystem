@@ -16,8 +16,17 @@ namespace TimetableSystem {
 	public ref class Signup : public System::Windows::Forms::Form
 	{
 	public:
+		Form ^obj;
 		Signup(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+		Signup(Form ^obj1)
+		{
+			obj = obj1;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -213,7 +222,7 @@ private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 	this->Hide();
-	
+	obj->Show();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	bool flag = false;
@@ -223,8 +232,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	if (flag)
 	{
 		MessageBox::Show("Signup Successful");
-		/*MyForm1^ f1 = gcnew MyForm1();
-		f1->ShowDialog();*/
+		this->Hide();
+		obj->Show();
 	}
 	else
 		MessageBox::Show("not successful");

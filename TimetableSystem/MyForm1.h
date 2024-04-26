@@ -236,8 +236,8 @@ namespace TimetableSystem {
 #pragma endregion
 	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 		this->Hide();
-		Signup signup;
-		signup.ShowDialog();
+		Signup^ obj1 = gcnew Signup(this);
+		obj1->ShowDialog();
 	}
 		  
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
