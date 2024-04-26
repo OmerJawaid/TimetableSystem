@@ -1,5 +1,6 @@
 #pragma once
 #include "Signup1.h"
+//#include"menu.h"
 #include"../mainDll/MainLibrary.h"
 #include <msclr/marshal_cppstd.h>
 #include"Dashboard.h"
@@ -261,8 +262,8 @@ namespace TimetableSystem {
 #pragma endregion
 	private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
 		this->Hide();
-		Signup signup;
-		signup.ShowDialog();
+		Signup^ obj1 = gcnew Signup(this);
+		obj1->ShowDialog();
 	}
 		  
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -278,13 +279,12 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
 	flag=login(username, password);
-	if (flag == true)
-	{
-		/*System::Threading::Thread::Sleep(2000);*/
-		label1->Text = "Login Successful";
-		
-	MyForm1::Hide();
-	System::Threading::Thread::Sleep(2000);
+
+	if (flag == true) {
+		MessageBox::Show("Login Successful");
+		this->Hide();
+		/*menu ^obj1 = gcnew menu();
+		obj1->ShowDialog();*/
 	Dashboard^ f1 = gcnew Dashboard();
 	f1->ShowDialog();
 	}
