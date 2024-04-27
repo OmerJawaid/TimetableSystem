@@ -159,6 +159,7 @@ namespace TimetableSystem {
 			// 
 			this->textBox3->Location = System::Drawing::Point(54, 129);
 			this->textBox3->Name = L"textBox3";
+			this->textBox3->PasswordChar = '*';
 			this->textBox3->Size = System::Drawing::Size(229, 20);
 			this->textBox3->TabIndex = 4;
 			this->textBox3->TextChanged += gcnew System::EventHandler(this, &MyForm1::textBox3_TextChanged);
@@ -280,14 +281,21 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
 	flag=login(username, password);
 
-	if (flag == true) {
-		MessageBox::Show("Login Successful");
-		this->Hide();
-	Dashboard^ f1 = gcnew Dashboard(this);
-	f1->ShowDialog();
+	if (textBox2->Text != "" && textBox3->Text != "")
+	{
+		if (flag == true) {
+			MessageBox::Show("Login Successful");
+			this->Hide();
+			Dashboard^ f1 = gcnew Dashboard(this);
+			f1->ShowDialog();
+		}
+		else
+			MessageBox::Show("Username or Password is Incorrect. Try Again!");
 	}
 	else
-		MessageBox::Show("not successful");
+	{
+		MessageBox::Show("Please enter Username and Password");
+	}
 }
 private: System::Void MyForm1_Load(System::Object^ sender, System::EventArgs^ e) {
 
