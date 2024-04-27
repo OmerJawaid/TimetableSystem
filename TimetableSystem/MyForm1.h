@@ -283,7 +283,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	if (flag == true) {
 		MessageBox::Show("Login Successful");
 		this->Hide();
-	Dashboard^ f1 = gcnew Dashboard();
+	Dashboard^ f1 = gcnew Dashboard(this);
 	f1->ShowDialog();
 	}
 	else

@@ -16,8 +16,17 @@ namespace TimetableSystem {
 	public ref class Dashboard : public System::Windows::Forms::Form
 	{
 	public:
+		Form^ obj;
 		Dashboard(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+		Dashboard(Form ^obj1)
+		{
+			obj = obj1;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -152,6 +161,7 @@ namespace TimetableSystem {
 			this->button4->TabIndex = 4;
 			this->button4->Text = L"Signout";
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &Dashboard::button4_Click);
 			// 
 			// label1
 			// 
@@ -281,6 +291,10 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	obj->Show();
 }
 };
 }
