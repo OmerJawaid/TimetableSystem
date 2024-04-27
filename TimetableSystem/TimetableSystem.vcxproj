@@ -120,11 +120,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Add.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Signup1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Add.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -144,6 +148,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Add.resx">
+      <DependentUpon>Add.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.h</DependentUpon>
     </EmbeddedResource>

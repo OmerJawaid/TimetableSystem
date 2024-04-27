@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <vcclr.h>
+#include"Add.h"
 namespace TimetableSystem {
 
 	using namespace System;
@@ -275,6 +276,9 @@ namespace TimetableSystem {
 	private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Hide();
+		Add^ add = gcnew Add();
+		add->ShowDialog();
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
