@@ -124,6 +124,7 @@
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Signup1.cpp" />
+    <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Add.h">
@@ -139,6 +140,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="singup.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="View.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="singup.resx">
       <DependentUpon>singup.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View.resx">
+      <DependentUpon>View.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

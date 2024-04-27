@@ -286,7 +286,41 @@ bool signup(string username, string password)
             }
         }
     }
+    //void Timetable::teacherTimetable() {
+    //    std::vector<std::string> timetableData;
 
+    //    // Map to store teacher's courses
+    //    std::map<Teacher*, std::vector<std::tuple<Course*, Time*, Room*>>> teacherCourses;
+
+    //    // Iterate through sectionCourses map
+    //    for (const auto& day : sectionCourses) {
+    //        for (const auto& sectionPair : day.second) {
+    //            for (const auto& courseTimeRoomTuple : sectionPair.second) {
+    //                Teacher* teacher = get<0>(courseTimeRoomTuple)->getTeacher();
+    //                teacherCourses[teacher].push_back(courseTimeRoomTuple);
+    //            }
+    //        }
+    //    }
+
+    //    // Iterate through the teacherCourses map
+    //    for (const auto& teacherCoursePair : teacherCourses) {
+    //        Teacher* teacher = teacherCoursePair.first;
+    //        const auto& courses = teacherCoursePair.second;
+
+    //        std::string teacherName = teacher->getName();
+    //        timetableData.push_back("Teacher: " + teacherName);
+
+    //        // Iterate through each course tuple
+    //        for (const auto& courseTimeRoomTuple : courses) {
+    //            Course* course = get<0>(courseTimeRoomTuple);
+    //            Time* time = get<1>(courseTimeRoomTuple);
+    //            Room* room = get<2>(courseTimeRoomTuple);
+    //            timetableData.push_back("Course: " + course->getCourseName() + ", Time: " + time->getStartTime() + " - " + time->getEndTime() + ", Room: " + room->getRoomNumber());
+    //        }
+    //    }
+
+    //    return timetableData;
+    //}
 
     void Timetable::studentTimetable() {
         /*buildTimetable();*/
