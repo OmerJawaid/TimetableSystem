@@ -21,7 +21,6 @@
     <ClCompile Include="Signup1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-
     <ClCompile Include="Dashboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

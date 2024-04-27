@@ -122,7 +122,6 @@
   <ItemGroup>
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
-    <ClCompile Include="menu.cpp" />
     <ClCompile Include="Signup1.cpp" />
   </ItemGroup>
   <ItemGroup>

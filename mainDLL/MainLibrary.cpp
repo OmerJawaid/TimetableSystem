@@ -20,7 +20,7 @@ bool login(string username, string password)
     bool found = false;
     
     if (infile.is_open()) {
-        while (infile >> user >> pass) {
+       while (infile >> user >> pass&&found==false) {
             if (user == username && pass == password)
                 found=true;
             else
