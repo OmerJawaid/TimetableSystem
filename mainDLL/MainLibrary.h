@@ -16,6 +16,7 @@ extern "C" MainLibrary_API  const char* get_my_name();
 #include<sstream>
 
 //extern "C" Dll1_API  const char* get_my_name();
+
 class Room;
 class Teacher;
 class Section;
@@ -33,14 +34,14 @@ class MainLibrary_API Course {
 public:
     std::vector<Student*> enrolledStudents;
 
-    Course(int courseCode, const std::string& coursename, Teacher* teacher, Room* assignedRoom)
+    Course(/*int courseCode, const std::string& coursename, Teacher* teacher, Room* assignedRoom*/)
     {
-        courseCode = courseCode;
+  /*      courseCode = courseCode;
         courseName = coursename;
         teacher = teacher;
         assignedRoom = assignedRoom;
         assignedSection = nullptr;
-        assignedTime = nullptr;
+        assignedTime = nullptr;*/
     };
 
     void addStudent(Student* student);
@@ -156,7 +157,7 @@ public:
     std::string getEndTime() { return endTime; }
 };
 
-class MainLibrary_API Timetable {
+ class MainLibrary_API Timetable {
 public:
     std::map<std::string, std::map<std::string, std::vector<std::tuple<Course*, Time*, Room*>>>> sectionCourses;
     void buildTimetable();
