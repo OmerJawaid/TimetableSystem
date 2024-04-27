@@ -117,6 +117,7 @@ namespace TimetableSystem {
 			// 
 			this->textBox1->Location = System::Drawing::Point(32, 192);
 			this->textBox1->Name = L"textBox1";
+			this->textBox1->PasswordChar = '*';
 			this->textBox1->Size = System::Drawing::Size(229, 20);
 			this->textBox1->TabIndex = 12;
 			// 
@@ -149,6 +150,7 @@ namespace TimetableSystem {
 			// 
 			this->textBox3->Location = System::Drawing::Point(32, 125);
 			this->textBox3->Name = L"textBox3";
+			this->textBox3->PasswordChar = '*';
 			this->textBox3->Size = System::Drawing::Size(229, 20);
 			this->textBox3->TabIndex = 4;
 			// 
@@ -230,14 +232,19 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
 	flag=signup(username, password);
-	if (flag)
+	if (textBox1->Text != "" && textBox2->Text != "" && textBox3->Text != "")
 	{
-		MessageBox::Show("Signup Successful");
-		this->Hide();
-		obj->Show();
+		if (flag)
+		{
+			MessageBox::Show("Signup Successful");
+			this->Hide();
+			obj->Show();
+		}
+		else
+			MessageBox::Show("Unable to open file");
 	}
 	else
-		MessageBox::Show("Unable to open file");
+		MessageBox::Show("Please fill all the fields");
 }
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
