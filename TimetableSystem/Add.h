@@ -15,6 +15,7 @@ namespace TimetableSystem {
 	/// </summary>
 	public ref class Add : public System::Windows::Forms::Form
 	{
+		List<Course^>^ courseList;
 	public:
 
 		Add(void)
@@ -25,6 +26,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 			/*courseList = gcnew List<Course^>();*/
+			courseList = gcnew List<Course^>();
 		}
 
 	protected:
@@ -524,10 +526,9 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
-		/*Course newCourse = gcnew Course();*/
+		Course^ newCourse = gcnew Course();
 
-		//// Add the created object to the list
-		//courseList->Add(newCourse);
+		courseList->Add(newCourse);
 	}
 	else if (label3->Text == "Section")
 	{

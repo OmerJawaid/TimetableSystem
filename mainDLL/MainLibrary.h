@@ -1,4 +1,5 @@
 #pragma once
+
 #ifdef MainLibrary_EXPORTS
 #define MainLibrary_API __declspec(dllexport)
 #else
@@ -22,7 +23,7 @@ class Teacher;
 class Section;
 class Time;
 class Student;
-class MainLibrary_API Course {
+class Course {      //Managed class having errors after including public ref class
     int courseCode;
     std::string courseName;
     Room* assignedRoom;
@@ -178,3 +179,30 @@ public:
 extern "C" MainLibrary_API bool signup(std::string username, std::string password);
 
 extern "C" MainLibrary_API bool login(std::string username, std::string password);
+
+
+#pragma once
+
+#ifdef MainLibrary_EXPORTS
+#define MainLibrary_API __declspec(dllexport)
+#else
+#define MainLibrary_API __declspec(dllimport)
+#endif
+
+#include <string>
+
+namespace MainLibrary {
+    // Exported API class
+    public ref class ManagedClass {
+    public:
+        // Constructor
+        ManagedClass();
+
+        // Member function
+        void DoSomething();
+
+    private:
+        // Member variables
+        int value;
+    };
+}
