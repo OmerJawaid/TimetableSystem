@@ -15,7 +15,7 @@ namespace TimetableSystem {
 	/// </summary>
 	public ref class Add : public System::Windows::Forms::Form
 	{
-		List<Course^>^ courseList;
+		
 	public:
 
 		Add(void)
@@ -26,7 +26,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 			/*courseList = gcnew List<Course^>();*/
-			courseList = gcnew List<Course^>();
+			
 		}
 
 	protected:
@@ -295,6 +295,7 @@ namespace TimetableSystem {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(201, 20);
 			this->textBox1->TabIndex = 18;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &Add::textBox1_TextChanged);
 			// 
 			// label4
 			// 
@@ -526,10 +527,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
-		Course^ newCourse = gcnew Course();
-
-		courseList->Add(newCourse);
-	}
+			}
 	else if (label3->Text == "Section")
 	{
 
@@ -538,6 +536,8 @@ else if (label3->Text == "Room")
 	{
 
 	}
+}
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

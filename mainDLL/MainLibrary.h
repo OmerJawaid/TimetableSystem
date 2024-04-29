@@ -179,30 +179,3 @@ public:
 extern "C" MainLibrary_API bool signup(std::string username, std::string password);
 
 extern "C" MainLibrary_API bool login(std::string username, std::string password);
-
-
-#pragma once
-
-#ifdef MainLibrary_EXPORTS
-#define MainLibrary_API __declspec(dllexport)
-#else
-#define MainLibrary_API __declspec(dllimport)
-#endif
-
-#include <string>
-
-namespace MainLibrary {
-    // Exported API class
-    public ref class ManagedClass {
-    public:
-        // Constructor
-        ManagedClass();
-
-        // Member function
-        void DoSomething();
-
-    private:
-        // Member variables
-        int value;
-    };
-}
