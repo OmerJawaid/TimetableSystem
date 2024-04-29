@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <vcclr.h>
 #include"Add.h"
+#include"View.h"
 namespace TimetableSystem {
 
 	using namespace System;
@@ -295,6 +296,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	View ^view = gcnew View(this);
+	view->ShowDialog();
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
