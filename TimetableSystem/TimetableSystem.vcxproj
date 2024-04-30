@@ -133,6 +133,7 @@
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MangedClass.h" />
     <ClInclude Include="MyForm1.h">
       <FileType>CppForm</FileType>
     </ClInclude>

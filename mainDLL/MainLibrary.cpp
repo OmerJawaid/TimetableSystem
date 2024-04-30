@@ -4,15 +4,6 @@
 
 using namespace std;
 
-void print_my_name()
-{
-   
-}
-
-const char* get_my_name()
-{
-    return "My name is Amaan.";
-}
 bool login(string username, string password)
 {
     ifstream infile("users.txt");
@@ -64,7 +55,7 @@ bool signup(string username, string password)
         }
     }
 
-    string Course::getCourseName() const {
+    std::string Course::getCourseName() const {
         return courseName;
     }
 

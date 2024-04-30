@@ -1,5 +1,6 @@
 #pragma once
 #include "../mainDLL/MainLibrary.h"
+#include"MangedCLass.h"
 namespace TimetableSystem {
 
 	using namespace System;
@@ -25,8 +26,7 @@ namespace TimetableSystem {
 			//TODO: Add the constructor code here
 			//
 			/*students = gcnew List<Student^>();*/
-			/*courseList = gcnew List<Course^>();*/
-			
+	/*		courseList = gcnew List<Course^>();*/		
 		}
 
 	protected:
@@ -527,6 +527,8 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
+		CourseM^ course1 = gcnew CourseM();
+		
 			}
 	else if (label3->Text == "Section")
 	{

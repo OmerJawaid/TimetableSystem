@@ -6,9 +6,6 @@
 #define MainLibrary_API __declspec(dllimport)
 #endif
 
-extern "C" MainLibrary_API void print_my_name();
-extern "C" MainLibrary_API  const char* get_my_name();
-
 #include <vector>
 #include <string>
 #include<iostream>
