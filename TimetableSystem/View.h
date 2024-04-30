@@ -2,6 +2,7 @@
 #include<vector>
 #include<string>
 #include"../mainDll/MainLibrary.h"
+#include"MangedClass.h"
 
 namespace TimetableSystem {
 
@@ -58,6 +59,8 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::ListBox^ listBox2;
+	private: System::Windows::Forms::ListBox^ listBox5;
 
 
 
@@ -94,6 +97,8 @@ namespace TimetableSystem {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
+			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// label2
@@ -163,7 +168,7 @@ namespace TimetableSystem {
 			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::Color::White;
-			this->button1->Location = System::Drawing::Point(220, 169);
+			this->button1->Location = System::Drawing::Point(12, 100);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(137, 46);
 			this->button1->TabIndex = 18;
@@ -178,12 +183,13 @@ namespace TimetableSystem {
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(394, 169);
+			this->button2->Location = System::Drawing::Point(12, 169);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(214, 46);
+			this->button2->Size = System::Drawing::Size(137, 46);
 			this->button2->TabIndex = 19;
 			this->button2->Text = L"Student wise Time Table";
 			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &View::button2_Click);
 			// 
 			// button3
 			// 
@@ -192,7 +198,7 @@ namespace TimetableSystem {
 			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(471, 235);
+			this->button3->Location = System::Drawing::Point(12, 235);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(137, 46);
 			this->button3->TabIndex = 20;
@@ -206,9 +212,9 @@ namespace TimetableSystem {
 			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button4->ForeColor = System::Drawing::Color::White;
-			this->button4->Location = System::Drawing::Point(220, 235);
+			this->button4->Location = System::Drawing::Point(12, 299);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(212, 46);
+			this->button4->Size = System::Drawing::Size(137, 46);
 			this->button4->TabIndex = 21;
 			this->button4->Text = L"Room wise TIme Table ";
 			this->button4->UseVisualStyleBackColor = false;
@@ -217,7 +223,7 @@ namespace TimetableSystem {
 			// 
 			this->button5->BackColor = System::Drawing::Color::LightSeaGreen;
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->button5->Location = System::Drawing::Point(23, 368);
+			this->button5->Location = System::Drawing::Point(37, 368);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(93, 37);
 			this->button5->TabIndex = 22;
@@ -225,11 +231,30 @@ namespace TimetableSystem {
 			this->button5->UseVisualStyleBackColor = false;
 			this->button5->Click += gcnew System::EventHandler(this, &View::button5_Click_1);
 			// 
+			// listBox2
+			// 
+			this->listBox2->ForeColor = System::Drawing::Color::White;
+			this->listBox2->FormattingEnabled = true;
+			this->listBox2->Location = System::Drawing::Point(-1, 79);
+			this->listBox2->Name = L"listBox2";
+			this->listBox2->Size = System::Drawing::Size(171, 342);
+			this->listBox2->TabIndex = 23;
+			// 
+			// listBox5
+			// 
+			this->listBox5->FormattingEnabled = true;
+			this->listBox5->Location = System::Drawing::Point(250, 146);
+			this->listBox5->Name = L"listBox5";
+			this->listBox5->Size = System::Drawing::Size(348, 199);
+			this->listBox5->TabIndex = 24;
+			this->listBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &View::listBox5_SelectedIndexChanged);
+			// 
 			// View
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(792, 417);
+			this->Controls->Add(this->listBox5);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -240,6 +265,7 @@ namespace TimetableSystem {
 			this->Controls->Add(this->listBox3);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->listBox2);
 			this->Name = L"View";
 			this->Text = L"View";
 			this->ResumeLayout(false);
@@ -254,6 +280,12 @@ private: System::Void button5_Click_1(System::Object^ sender, System::EventArgs^
 	obj->Show();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+	//TimetableM^ timetable;
+	//timetable;
+}
+private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

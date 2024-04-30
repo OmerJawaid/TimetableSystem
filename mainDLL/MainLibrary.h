@@ -94,9 +94,7 @@ private:
 public:
     Section(const std::string& name) : name(name) {}
 
-    const std::string& getName() const {
-        return name;
-    }
+    const std::string& getName() const;
 
     void addStudent(Student* student) {
         students.push_back(student);
@@ -140,10 +138,7 @@ public:
     void assignCourse(Course* course);
     void removeCourse(Course* course);
     void viewCourse(Course* course);
-    std::string getName()
-    {
-        return name;
-    }
+    std::string getName();
 };
 
 class MainLibrary_API Time {
@@ -151,8 +146,8 @@ private:
     std::string startTime, endTime;
 public:
     Time(std::string start, std::string end) :startTime(start), endTime(end) {};
-    std::string getStartTime() { return startTime; }
-    std::string getEndTime() { return endTime; }
+    std::string getStartTime();
+    std::string getEndTime();
 };
 
  class MainLibrary_API Timetable {
@@ -160,10 +155,10 @@ public:
     std::map<std::string, std::map<std::string, std::vector<std::tuple<Course*, Time*, Room*>>>> sectionCourses;
     void buildTimetable();
     void scheduleCourse(Course* course, std::vector<Time*>& times, Room* room);
-    void teacherTimetable();
-    void studentTimetable();
-    void sectionTimetable();
-    void roomTimetable();
+    std::vector<std::string> teacherTimetable();
+    std::vector<std::string> studentTimetable();
+    std::vector<std::string> sectionTimetable();
+    std::vector<std::string> roomTimetable();
     void whoIsTeachingAt(std::string day, std::string time);
     void getTimeTableForDay(std::string day);
     std::vector<Time*> createTimeSlots();

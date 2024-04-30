@@ -10,3 +10,10 @@ public:
 		course = new Course();
 	}
 };
+//public ref class TimetableM {
+//public:
+//	Timetable* timetable;
+//	TimetableM() {
+//		timetable = new Timetable();
+//	}
+//};
