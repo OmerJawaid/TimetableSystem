@@ -1,6 +1,7 @@
 #pragma once
 #include "../mainDLL/MainLibrary.h"
 #include"MangedCLass.h"
+//#include<msclr/marshal_cppstd.h>
 namespace TimetableSystem {
 
 	using namespace System;
@@ -16,7 +17,12 @@ namespace TimetableSystem {
 	/// </summary>
 	public ref class Add : public System::Windows::Forms::Form
 	{
-		
+		List<CourseM^>^ courses = gcnew List<CourseM^>();
+		List<TeacherM^>^ teachers= gcnew List<TeacherM^>();
+		List<RoomM^>^ rooms= gcnew List<RoomM^>();
+		int courseiterator = 0;
+		int teacheriterator = 0;
+		int roomiterator = 0;
 	public:
 
 		Add(void)
@@ -26,7 +32,8 @@ namespace TimetableSystem {
 			//TODO: Add the constructor code here
 			//
 			/*students = gcnew List<Student^>();*/
-	/*		courseList = gcnew List<Course^>();*/		
+	/*		courseList = gcnew List<Course^>();*/	
+		
 		}
 
 	protected:
@@ -528,7 +535,20 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	else if (label3->Text == "Course")
 	{
 		CourseM^ course1 = gcnew CourseM();
-		
+		courses->Add(course1);
+		try {
+			course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
+		}
+				catch(System::Exception^e) {
+						MessageBox::Show("Teacher not assigned to course");
+		}
+		try {
+			course1->course->setAssignedRoom(rooms[courseiterator]->room);
+		}
+				catch (System::Exception^e) {
+			MessageBox::Show("Room not assigned to course");
+		}
+		courseiterator++;
 			}
 	else if (label3->Text == "Section")
 	{

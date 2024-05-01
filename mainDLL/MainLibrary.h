@@ -60,7 +60,12 @@ public:
     }*/
     Time* getAssignedTime() const;
     /*void setAssignedSection(Section* section);*/
-    void setAssignedRoom(Room* room);
+    void setAssignedRoom(Room* room) {
+        assignedRoom= room;
+    }
+    void teacherAssignCourse(Teacher* teacher) {
+        		this->teacher = teacher;
+    }
 
     std::vector<Student*> getEnrolledStudents() const;
 };
@@ -76,7 +81,7 @@ private:
     std::vector<std::string> available_labs;
 
 public:
-    Room(); Room(std::string r_no, int cap) : roomNumber(r_no), capacity(cap) {}
+    Room(std::string r_no, int cap);
     void displayRooms_available();
     void assignRoom(Course* course);
     bool checkAvailabitiy(std::string room_number);
@@ -136,7 +141,7 @@ private:
     std::string name, email;
     std::vector<Course*> coursesTaught;
 public:
-    Teacher(std::string n, int ID, std::string em);
+    Teacher(/*std::string n, int ID, std::string em*/);
     void assignCourse(Course* course);
     void removeCourse(Course* course);
     void viewCourse(Course* course);

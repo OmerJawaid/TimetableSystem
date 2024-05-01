@@ -76,9 +76,9 @@ bool signup(string username, string password)
     }
 
 
-    void Course::setAssignedRoom(Room* room) {
+   /* void Course::setAssignedRoom(Room* room) {
         room = assignedRoom;
-    }
+    }*/
 
     vector<Student*> Course::getEnrolledStudents() const {
         return enrolledStudents;
@@ -93,6 +93,10 @@ bool signup(string username, string password)
     //    //total_labs = { "401","402" }; // Initialize total labs
     //    //available_labs = total_labs; // Initially all labs are available
     //}
+    Room::Room(string r_no, int cap) {
+        roomNumber = r_no;
+        capacity = cap;
+    }
 
     void Room::displayRooms_available() {
        /* cout << "Rooms available: " << endl;*/
@@ -170,7 +174,7 @@ bool signup(string username, string password)
 
 
     //Teacher.cpp
-    Teacher::Teacher(std::string n, int ID, std::string em) : name(n), teacherID(ID), email(em) {}
+    Teacher::Teacher(/*std::string n, int ID, std::string em*/) : name(/*n*/), teacherID(/*ID*/), email(/*em*/) {}
 
     void Teacher::assignCourse(Course* course) {
         coursesTaught.push_back(course);
@@ -187,9 +191,9 @@ bool signup(string username, string password)
 
     void Teacher::viewCourse(Course* course) {
         /*std::cout << "Courses Taught by " << name << " are:" << std::endl;*/
-        for (auto view = coursesTaught.begin(); view != coursesTaught.end(); view++) {
-            /*std::cout << (*view)->getCourseName() << std::endl;*/
-        }
+        //for (auto view = coursesTaught.begin(); view != coursesTaught.end(); view++) {
+        //    /*std::cout << (*view)->getCourseName() << std::endl;*/
+        //}
     }
 
 
