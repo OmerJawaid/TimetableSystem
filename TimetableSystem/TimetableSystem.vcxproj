@@ -162,6 +162,7 @@
     <EmbeddedResource Include="MyForm1.resx">
       <DependentUpon>MyForm1.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx" />
     <EmbeddedResource Include="Signup1.resx">
       <DependentUpon>Signup1.h</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +172,10 @@
     <EmbeddedResource Include="View.resx">
       <DependentUpon>View.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\black-background-with-focus-spot-light_1017-27230.jpg" />
+    <Image Include="..\..\..\..\Downloads\plain-black-background-02fh7564l8qq4m6d.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

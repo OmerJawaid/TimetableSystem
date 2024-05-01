@@ -4,6 +4,13 @@
 
 using namespace std;
 
+vector<string>Test()
+{
+    vector<string>str;
+    str.push_back("Hello");
+    str.push_back("World");
+    return str;
+}
 bool login(string username, string password)
 {
     ifstream infile("users.txt");

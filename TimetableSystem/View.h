@@ -2,23 +2,26 @@
 #include<vector>
 #include<string>
 #include"../mainDll/MainLibrary.h"
-
+#include<msclr/marshal_cppstd.h>
+#include"MangedClass.h"
 namespace TimetableSystem {
 
 	using namespace System;
+	using namespace msclr::interop;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	//extern"C" {
-	//	Timetable t;
-	//	/*__declspec(dllexport) std::vector<std::string> teacherTimetable();
-	//	__declspec(dllexport) std::vector<std::string> studentTimetable();
-	//	__declspec(dllexport) std::vector<std::string> queryTimetable();
-	//	__declspec(dllexport) std::vector<std::string> roomTimetable();*/
-	//}
+
+	extern"C" {
+		__declspec(dllexport) std::vector<std::string> Test();
+		__declspec(dllexport) std::vector<std::string> teacherTimetable();
+		/*__declspec(dllexport) std::vector<std::string> studentTimetable();
+		__declspec(dllexport) std::vector<std::string> queryTimetable();
+		__declspec(dllexport) std::vector<std::string> roomTimetable();*/
+	}
 	public ref class View : public System::Windows::Forms::Form
 	{
 	public:
@@ -64,6 +67,8 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::ListBox^ listBox2;
 	private: System::Windows::Forms::ListBox^ listBox5;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
 
 
 
@@ -102,6 +107,8 @@ namespace TimetableSystem {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
 			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label2
@@ -246,17 +253,39 @@ namespace TimetableSystem {
 			// listBox5
 			// 
 			this->listBox5->FormattingEnabled = true;
-			this->listBox5->Location = System::Drawing::Point(250, 146);
+			this->listBox5->Location = System::Drawing::Point(188, 116);
 			this->listBox5->Name = L"listBox5";
-			this->listBox5->Size = System::Drawing::Size(348, 199);
+			this->listBox5->Size = System::Drawing::Size(99, 30);
 			this->listBox5->TabIndex = 24;
 			this->listBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &View::listBox5_SelectedIndexChanged);
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(673, 116);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(35, 13);
+			this->label3->TabIndex = 25;
+			this->label3->Text = L"label3";
+			this->label3->Click += gcnew System::EventHandler(this, &View::label3_Click);
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(403, 169);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(35, 13);
+			this->label4->TabIndex = 26;
+			this->label4->Text = L"label4";
+			this->label4->Click += gcnew System::EventHandler(this, &View::label4_Click);
 			// 
 			// View
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(792, 417);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label3);
 			this->Controls->Add(this->listBox5);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -271,6 +300,7 @@ namespace TimetableSystem {
 			this->Controls->Add(this->listBox2);
 			this->Name = L"View";
 			this->Text = L"View";
+			this->Load += gcnew System::EventHandler(this, &View::View_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -282,19 +312,36 @@ private: System::Void button5_Click_1(System::Object^ sender, System::EventArgs^
 	this->Hide();
 	obj->Show();
 }
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	/*listBox5->Items->Clear();
-	Timetable t;
-	std::vector<std::string> teacher = t.teacherTimetable();
-	for (int i = 0; i < teacher.size(); i++) {
-		listBox5->Items->Add(gcnew String(teacher[i].c_str()));
-	}*/
-}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+		std::vector<std::string> cliStr = Test();
+		String^ clrStr = gcnew String(""); // Initialize clrStr
+		for (int i = 0; i < cliStr.size(); i++)
+		{
+			clrStr += marshal_as<String^>(cliStr[i]) + " "; // Concatenate each element
+		}
+		label3->Text = clrStr;
+
+		//std::vector<std::string> teacher = teacherTimetable();
+		//String^ clr = gcnew String(""); // Initialize clrStr
+		//for (int i = 0; i < teacher.size(); i++)
+		//{
+		//	clr += marshal_as<String^>(teacher[i]) + " "; // Concatenate each element
+		//}
+		//	label4->Text = clr;
+		
+	}
 private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	//TimetableM^ timetable;
-	//timetable;
+	/*TimetableM^ timetable;
+	timetable;*/
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void View_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
