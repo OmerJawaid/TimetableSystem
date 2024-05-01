@@ -2,7 +2,6 @@
 #include<vector>
 #include<string>
 #include"../mainDll/MainLibrary.h"
-#include"MangedClass.h"
 
 namespace TimetableSystem {
 
@@ -13,9 +12,13 @@ namespace TimetableSystem {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for View
-	/// </summary>
+	//extern"C" {
+	//	Timetable t;
+	//	/*__declspec(dllexport) std::vector<std::string> teacherTimetable();
+	//	__declspec(dllexport) std::vector<std::string> studentTimetable();
+	//	__declspec(dllexport) std::vector<std::string> queryTimetable();
+	//	__declspec(dllexport) std::vector<std::string> roomTimetable();*/
+	//}
 	public ref class View : public System::Windows::Forms::Form
 	{
 	public:
@@ -280,6 +283,12 @@ private: System::Void button5_Click_1(System::Object^ sender, System::EventArgs^
 	obj->Show();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	/*listBox5->Items->Clear();
+	Timetable t;
+	std::vector<std::string> teacher = t.teacherTimetable();
+	for (int i = 0; i < teacher.size(); i++) {
+		listBox5->Items->Add(gcnew String(teacher[i].c_str()));
+	}*/
 }
 private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	//TimetableM^ timetable;
