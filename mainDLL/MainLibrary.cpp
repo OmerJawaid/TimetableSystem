@@ -144,11 +144,21 @@ bool signup(string username, string password)
         //}
     }
 
-
+    //Section
+    Section::Section(const std::string& secname) {
+        name = secname;
+    }
 
 
     //Student.cpp
-
+    /*:studentID(ID), name(na), email(mail){}
+    */
+    Student::Student(int ID, string na, string mail)
+    {
+        studentID = ID;
+        name = na;
+        email = mail;
+    }
     void Student::enrollCourse(Course* course) {
         coursesEnrolled.push_back(course);
     }
@@ -170,11 +180,14 @@ bool signup(string username, string password)
     string Student::getsection() const {
         return section;
     }
+    void Student::AssignSection(Section* section) {
+        		section = section;
+    }
 
 
 
     //Teacher.cpp
-    Teacher::Teacher(/*std::string n, int ID, std::string em*/) : name(/*n*/), teacherID(/*ID*/), email(/*em*/) {}
+    Teacher::Teacher(std::string n, int ID, std::string em) : name(/*n*/), teacherID(/*ID*/), email(/*em*/) {}
 
     void Teacher::assignCourse(Course* course) {
         coursesTaught.push_back(course);

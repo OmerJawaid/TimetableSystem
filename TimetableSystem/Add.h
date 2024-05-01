@@ -1,6 +1,7 @@
 #pragma once
 #include "../mainDLL/MainLibrary.h"
 #include"MangedCLass.h"
+//#include <msclr/marshal_cppstd.h>
 //#include<msclr/marshal_cppstd.h>
 namespace TimetableSystem {
 
@@ -11,6 +12,7 @@ namespace TimetableSystem {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic;
+	using namespace Runtime::InteropServices;
 
 	/// <summary>
 	/// Summary for Add
@@ -20,9 +22,12 @@ namespace TimetableSystem {
 		List<CourseM^>^ courses = gcnew List<CourseM^>();
 		List<TeacherM^>^ teachers= gcnew List<TeacherM^>();
 		List<RoomM^>^ rooms= gcnew List<RoomM^>();
+		List<StudentM^>^students = gcnew List<StudentM^>();
+		List<SectionM^>^ sections = gcnew List<SectionM^>();
 		int courseiterator = 0;
 		int teacheriterator = 0;
 		int roomiterator = 0;
+		int studentiterator = 0;
 	public:
 
 		Add(void)
@@ -295,6 +300,7 @@ namespace TimetableSystem {
 			this->comboBox1->Size = System::Drawing::Size(209, 21);
 			this->comboBox1->TabIndex = 17;
 			this->comboBox1->Text = L" ";
+			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Add::comboBox1_SelectedIndexChanged);
 			// 
 			// textBox1
 			// 
@@ -359,6 +365,7 @@ namespace TimetableSystem {
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(209, 20);
 			this->textBox3->TabIndex = 23;
+			this->textBox3->TextChanged += gcnew System::EventHandler(this, &Add::textBox3_TextChanged);
 			// 
 			// label7
 			// 
@@ -458,7 +465,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	label3->Text = "Teacher";
 	label5->Text = "ID";
 	label6->Text = "Email";
-	label7->Text= "Course";
+	label7->Visible = false;
 	label5->Show();
 	label6->Show();
 	label7->Show();
@@ -527,28 +534,52 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (label3->Text == "Student")
 	{
+		int enrollment = Convert::ToInt32(textBox2->Text);
 
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+		std::string studentname(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+
+		ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
+		std::string studentemail(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+
+
+		StudentM^ student = gcnew StudentM(enrollment,studentname,studentemail);
+		students->Add(student);
+
+		student->student->AssignSection(sections[studentiterator]->section);
 	}
 	else if (label3->Text == "Teacher")
 	{
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+		std::string teachername(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+
+		int ID = Convert::ToInt32(textBox2->Text);
+
+		ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
+		std::string teacheremail(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+		TeacherM^ teacher = gcnew TeacherM(teachername,ID,teacheremail);
+		teachers->Add(teacher);
 	}
 	else if (label3->Text == "Course")
 	{
-		CourseM^ course1 = gcnew CourseM();
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+		std::string name(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+		int coursecode = Convert::ToInt32(textBox2->Text);
+		CourseM^ course1 = gcnew CourseM(coursecode,name);
 		courses->Add(course1);
 		try {
 			course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
+			course1->course->setAssignedRoom(rooms[courseiterator]->room);
+			courseiterator++;
 		}
 				catch(System::Exception^e) {
-						MessageBox::Show("Teacher not assigned to course");
+						MessageBox::Show("Teacher or Room not assigned to course");
 		}
-		try {
-			course1->course->setAssignedRoom(rooms[courseiterator]->room);
-		}
-				catch (System::Exception^e) {
-			MessageBox::Show("Room not assigned to course");
-		}
-		courseiterator++;
 			}
 	else if (label3->Text == "Section")
 	{
@@ -560,6 +591,10 @@ else if (label3->Text == "Room")
 	}
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

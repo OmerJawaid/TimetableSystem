@@ -32,14 +32,11 @@ class Course {      //Managed class having errors after including public ref cla
 public:
     std::vector<Student*> enrolledStudents;
 
-    Course(/*int courseCode, const std::string& coursename, Teacher* teacher, Room* assignedRoom*/)
-    {
-  /*      courseCode = courseCode;
+    Course(int courseCode, const std::string& coursename)
+    {     courseCode = courseCode;
         courseName = coursename;
-        teacher = teacher;
-        assignedRoom = assignedRoom;
         assignedSection = nullptr;
-        assignedTime = nullptr;*/
+        assignedTime = nullptr;
     };
 
     void addStudent(Student* student);
@@ -97,7 +94,7 @@ private:
     std::vector<Student*> students;
 
 public:
-    Section(const std::string& name) : name(name) {}
+    Section(const std::string& secname);
 
     const std::string& getName() const {
         return name;
@@ -127,12 +124,13 @@ private:
 
 public:
     std::vector<Course*>coursesEnrolled;
-    Student(int ID, std::string na, std::string mail, std::string sec) :studentID(ID), name(na), email(mail), section(sec) {};
+    Student(int ID, std::string na, std::string mail);
     void enrollCourse(Course* course);
     void dropCourse(Course* course);
     void viewCourses(Course* course);
     std::string getstudentname();
     std::string getsection()const;
+    void AssignSection(Section* section);
 };
 
 class MainLibrary_API Teacher {
@@ -141,7 +139,7 @@ private:
     std::string name, email;
     std::vector<Course*> coursesTaught;
 public:
-    Teacher(/*std::string n, int ID, std::string em*/);
+    Teacher(std::string n, int ID, std::string em);
     void assignCourse(Course* course);
     void removeCourse(Course* course);
     void viewCourse(Course* course);
