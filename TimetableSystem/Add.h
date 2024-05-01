@@ -583,11 +583,20 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			}
 	else if (label3->Text == "Section")
 	{
-
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+		std::string Sectionname(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+		SectionM^ section = gcnew SectionM(Sectionname);
+		sections->Add(section);
 	}
 else if (label3->Text == "Room")
 	{
-
+		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+		std::string Roomnumber(static_cast<const char*>(ptr.ToPointer()));
+		Marshal::FreeHGlobal(ptr);
+		int capacity = Convert::ToInt64(textBox2->Text);
+		RoomM^ room = gcnew RoomM(Roomnumber,capacity );
+		rooms->Add(room);
 	}
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
