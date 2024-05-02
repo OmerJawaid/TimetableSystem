@@ -569,6 +569,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
+		AddforComboboxTeacher(comboBox1);
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 		std::string name(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
@@ -580,10 +581,10 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			course1->course->setAssignedRoom(rooms[courseiterator]->room);
 			courseiterator++;
 		}
-				catch(System::Exception^e) {
-						MessageBox::Show("Teacher or Room not assigned to course");
+		catch (System::Exception^ e) {
+			MessageBox::Show("Teacher or Room not assigned to course");
 		}
-			}
+	}
 	else if (label3->Text == "Section")
 	{
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
@@ -624,7 +625,15 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 	   }
 	   void AddforComboboxTeacher(ComboBox^ comboBox)
 	   {
-
+		   array<String^>^ teacherNames = gcnew array<String^>(teachers->Count);
+		   int index = 0;
+		   for each (TeacherM ^ teacher in teachers)
+		   {
+			   String^ teachername = gcnew System::String(teacher->teacher->getName().c_str());
+			   teacherNames[index] = teachername;
+			   index++;
+		   }
+		   comboBox->Items->AddRange(teacherNames);
 	   }
 };
 

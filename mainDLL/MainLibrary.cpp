@@ -213,6 +213,10 @@ bool signup(string username, string password)
         //    /*std::cout << (*view)->getCourseName() << std::endl;*/
         //}
     }
+    string Teacher::getName()
+    {
+            return name;
+    }
 
 
 
