@@ -288,7 +288,7 @@ namespace TimetableSystem {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
-		Add^ add = gcnew Add();
+		Add^ add = gcnew Add(this);
 		add->ShowDialog();
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -30,7 +30,7 @@ namespace TimetableSystem {
 		int roomiterator = 0;
 		int studentiterator = 0;
 	public:
-
+		Form^ obj;
 		Add(void)
 		{
 			InitializeComponent();
@@ -40,6 +40,16 @@ namespace TimetableSystem {
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/	
 		
+		}
+		Add(Form ^obj1)
+		{
+			obj = obj1;
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+			/*students = gcnew List<Student^>();*/
+	/*		courseList = gcnew List<Course^>();*/
 		}
 
 	protected:
@@ -80,6 +90,8 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::ListBox^ listBox5;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 	private: System::Windows::Forms::Button^ button6;
+	private: System::Windows::Forms::Button^ button7;
+	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
 	protected:
 
 	private:
@@ -118,6 +130,8 @@ namespace TimetableSystem {
 			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -423,11 +437,24 @@ namespace TimetableSystem {
 			this->button6->UseVisualStyleBackColor = false;
 			this->button6->Click += gcnew System::EventHandler(this, &Add::button6_Click);
 			// 
+			// button7
+			// 
+			this->button7->BackColor = System::Drawing::Color::LightSeaGreen;
+			this->button7->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button7->Location = System::Drawing::Point(186, 421);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(116, 42);
+			this->button7->TabIndex = 28;
+			this->button7->Text = L"Back";
+			this->button7->UseVisualStyleBackColor = false;
+			this->button7->Click += gcnew System::EventHandler(this, &Add::button7_Click);
+			// 
 			// Add
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(777, 485);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->textBox3);
@@ -615,6 +642,11 @@ else if (label3->Text == "Room")
 	}
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+
+private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	obj->Show();
 }
 private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
