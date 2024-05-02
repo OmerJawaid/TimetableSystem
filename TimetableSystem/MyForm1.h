@@ -80,7 +80,6 @@ namespace TimetableSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm1::typeid));
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
@@ -207,7 +206,7 @@ namespace TimetableSystem {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackColor = System::Drawing::Color::Black;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(777, 485);
 			this->Controls->Add(this->linkLabel1);

@@ -153,6 +153,7 @@ public:
 
    class MainLibrary_API Timetable {
     public:
+        Timetable();
         std::map<std::string, std::map<std::string, std::vector<std::tuple<Course*, Time*, Room*>>>> sectionCourses;
         void buildTimetable();
         void scheduleCourse(Course* course, std::vector<Time*>& times, Room* room);

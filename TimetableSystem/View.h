@@ -2,22 +2,24 @@
 #include<vector>
 #include<string>
 #include"../mainDll/MainLibrary.h"
-#include<msclr/marshal_cppstd.h>
 #include"MangedClass.h"
 namespace TimetableSystem {
 
 	using namespace System;
-	using namespace msclr::interop;
+	
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace Runtime::InteropServices;
+	using namespace System::Collections::Generic;
 
 
 	extern"C" {
-		__declspec(dllexport) std::vector<std::string> Test();
-		__declspec(dllexport) std::vector<std::string> teacherTimetable();
+		//__declspec(dllexport) std::vector<std::string> Test();
+		//__declspec(dllexport) std::vector<std::string> teacherTimetable();
+
 		/*__declspec(dllexport) std::vector<std::string> studentTimetable();
 		__declspec(dllexport) std::vector<std::string> queryTimetable();
 		__declspec(dllexport) std::vector<std::string> roomTimetable();*/
@@ -66,9 +68,14 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::ListBox^ listBox2;
-	private: System::Windows::Forms::ListBox^ listBox5;
+
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
+
+
+
+
+
+
 
 
 
@@ -106,9 +113,7 @@ namespace TimetableSystem {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
-			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label2
@@ -228,6 +233,7 @@ namespace TimetableSystem {
 			this->button4->TabIndex = 21;
 			this->button4->Text = L"Room wise TIme Table ";
 			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &View::button4_Click);
 			// 
 			// button5
 			// 
@@ -250,43 +256,22 @@ namespace TimetableSystem {
 			this->listBox2->Size = System::Drawing::Size(171, 342);
 			this->listBox2->TabIndex = 23;
 			// 
-			// listBox5
-			// 
-			this->listBox5->FormattingEnabled = true;
-			this->listBox5->Location = System::Drawing::Point(188, 116);
-			this->listBox5->Name = L"listBox5";
-			this->listBox5->Size = System::Drawing::Size(99, 30);
-			this->listBox5->TabIndex = 24;
-			this->listBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &View::listBox5_SelectedIndexChanged);
-			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(673, 116);
+			this->label3->Location = System::Drawing::Point(257, 143);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(35, 13);
 			this->label3->TabIndex = 25;
 			this->label3->Text = L"label3";
 			this->label3->Click += gcnew System::EventHandler(this, &View::label3_Click);
 			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(403, 169);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(35, 13);
-			this->label4->TabIndex = 26;
-			this->label4->Text = L"label4";
-			this->label4->Click += gcnew System::EventHandler(this, &View::label4_Click);
-			// 
 			// View
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(792, 417);
-			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->listBox5);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
@@ -314,34 +299,63 @@ private: System::Void button5_Click_1(System::Object^ sender, System::EventArgs^
 }
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		std::vector<std::string> cliStr = Test();
-		String^ clrStr = gcnew String(""); // Initialize clrStr
-		for (int i = 0; i < cliStr.size(); i++)
-		{
-			clrStr += marshal_as<String^>(cliStr[i]) + " "; // Concatenate each element
-		}
-		label3->Text = clrStr;
+		TimetableM^ timetable = gcnew TimetableM();
+		std::vector<std::string> teacherVector = timetable->timetable->teacherTimetable();
 
-		//std::vector<std::string> teacher = teacherTimetable();
-		//String^ clr = gcnew String(""); // Initialize clrStr
-		//for (int i = 0; i < teacher.size(); i++)
-		//{
-		//	clr += marshal_as<String^>(teacher[i]) + " "; // Concatenate each element
-		//}
-		//	label4->Text = clr;
-		
+		// Create a List to store System::String^
+		System::Collections::Generic::List<System::String^>^ teacherList = gcnew System::Collections::Generic::List<System::String^>();
+
+		// Convert each std::string to System::String^ and add to the list
+		for (const std::string& teacher : teacherVector) {
+			System::String^ teacherString = gcnew System::String(teacher.c_str());
+			teacherList->Add(teacherString);
+		}
+		System::String^ teacherString = String::Join(", ", teacherList);
+
+		label3->Text = teacherString;
 	}
 private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	/*TimetableM^ timetable;
-	timetable;*/
+	
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+	TimetableM^ timetable = gcnew TimetableM();
+	std::vector<std::string> studentVector = timetable->timetable->studentTimetable();
+
+	// Create a List to store System::String^
+	System::Collections::Generic::List<System::String^>^ studentList = gcnew System::Collections::Generic::List<System::String^>();
+
+	// Convert each std::string to System::String^ and add to the list
+	for (const std::string& teacher : studentVector) {
+		System::String^ teacherString = gcnew System::String(teacher.c_str());
+		studentList->Add(teacherString);
+	}
+	System::String^ studentString = String::Join(", ", studentList);
+
+	label3->Text = studentString;
 }
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void View_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
+private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	TimetableM^ timetable = gcnew TimetableM();
+	std::vector<std::string> roomVector = timetable->timetable->roomTimetable();
+
+	// Create a List to store System::String^
+	System::Collections::Generic::List<System::String^>^ roomList = gcnew System::Collections::Generic::List<System::String^>();
+
+	// Convert each std::string to System::String^ and add to the list
+	for (const std::string& teacher : roomVector) {
+		System::String^ teacherString = gcnew System::String(teacher.c_str());
+		roomList->Add(teacherString);
+	}
+	System::String^ roomString = String::Join(", ", roomList);
+
+	label3->Text = roomString;
 }
 };
 }

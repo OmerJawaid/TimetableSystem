@@ -221,6 +221,7 @@ string Time::getEndTime()
 
 
     //Timetable.cpp
+    Timetable::Timetable() {};
     //void Timetable::scheduleCourse(Course* course, vector<Time*>& times, Room* room) {
     //    // Shuffle time slots to randomize scheduling
     //    random_shuffle(times.begin(), times.end());
@@ -300,7 +301,7 @@ string Time::getEndTime()
 
     vector<string> Timetable::teacherTimetable() {
         vector<string> timetableData;
-
+        timetableData.push_back("Hellow world");
    
         map<Teacher*,vector<tuple<Course*, Time*, Room*>>> teacherCourses;
 

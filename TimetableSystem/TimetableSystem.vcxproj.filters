@@ -54,17 +54,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\black-background-with-focus-spot-light_1017-27230.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Downloads\plain-black-background-02fh7564l8qq4m6d.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
-  </ItemGroup>
 </Project>
