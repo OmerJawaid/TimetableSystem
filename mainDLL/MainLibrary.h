@@ -149,28 +149,33 @@ private:
     std::string startTime, endTime;
 public:
     Time(std::string start, std::string end) :startTime(start), endTime(end) {};
-    std::string getStartTime() { return startTime; }
-    std::string getEndTime() { return endTime; }
+    std::string getStartTime();
+    std::string getEndTime();
 };
 
- class MainLibrary_API Timetable {
-public:
-    std::map<std::string, std::map<std::string, std::vector<std::tuple<Course*, Time*, Room*>>>> sectionCourses;
-    void buildTimetable();
-    void scheduleCourse(Course* course, std::vector<Time*>& times, Room* room);
-    void teacherTimetable();
-    void studentTimetable();
-    void sectionTimetable();
-    void roomTimetable();
-    void whoIsTeachingAt(std::string day, std::string time);
-    void getTimeTableForDay(std::string day);
-    std::vector<Time*> createTimeSlots();
-    void writeTimetableToFile(const std::string& filename, const std::string& content);
-    void writeTeacherTimetableToFile();
-    void writeStudentTimetableToFile();
-};
+
+   class MainLibrary_API Timetable {
+    public:
+        Timetable();
+        std::map<std::string, std::map<std::string, std::vector<std::tuple<Course*, Time*, Room*>>>> sectionCourses;
+        void buildTimetable();
+        void scheduleCourse(Course* course, std::vector<Time*>& times, Room* room);
+        std::vector<std::string> teacherTimetable();
+        std::vector<std::string> studentTimetable();
+        std::vector<std::string> sectionTimetable();
+        std::vector<std::string> roomTimetable();
+        void whoIsTeachingAt(std::string day, std::string time);
+        void getTimeTableForDay(std::string day);
+        std::vector<Time*> createTimeSlots();
+        void writeTimetableToFile(const std::string& filename, const std::string& content);
+        void writeTeacherTimetableToFile();
+        void writeStudentTimetableToFile();
+    };
+
 
 
 extern "C" MainLibrary_API bool signup(std::string username, std::string password);
 
 extern "C" MainLibrary_API bool login(std::string username, std::string password);
+
+extern "C" MainLibrary_API std::vector<std::string>Test();
