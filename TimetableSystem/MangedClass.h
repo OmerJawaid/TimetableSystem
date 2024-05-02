@@ -1,6 +1,7 @@
 #pragma once
 #include"../mainDLL/MainLibrary.h"
 #include"Add.h"
+//#include <msclr/marshal_cppstd.h>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -11,13 +12,6 @@ public:
 	Course* course;
 	CourseM(int courseCode, const std::string& coursename) {
 		course = new Course(courseCode,coursename);
-	}
-};
-public ref class TimetableM {
-public:
-	Timetable* timetable;
-	TimetableM() {
-		timetable = new Timetable();
 	}
 };
 public ref class TeacherM {
@@ -49,4 +43,10 @@ public:
 		section = new Section(name);
 	}
 };
-
+//void additems()
+//{
+//	array<String^>^ items = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+//
+//	// Add the items to the combo box
+//	AddcomboBox1->Items->AddRange(items);
+//}
