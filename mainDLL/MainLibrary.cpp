@@ -322,9 +322,7 @@ string Time::getEndTime()
     //}
 
     vector<string> Timetable::teacherTimetable() {
-        vector<string> timetableData;
-        timetableData.push_back("Hellow world");
-   
+        vector<string> timetableData;   
         map<Teacher*,vector<tuple<Course*, Time*, Room*>>> teacherCourses;
 
         for (const auto& day : sectionCourses) {
@@ -341,15 +339,17 @@ string Time::getEndTime()
             const auto& courses = teacherCoursePair.second;
 
             string teacherName = teacher->getName();
-            timetableData.push_back("Teacher: " + teacherName);
+            timetableData.push_back(" Teacher: " + teacherName);
 
-            for (const auto& courseTimeRoomTuple : courses) {
+            for(const auto& courseTimeRoomTuple : courses) {
                 Course* course = get<0>(courseTimeRoomTuple);
                 Time* time = get<1>(courseTimeRoomTuple);
                 Room* room = get<2>(courseTimeRoomTuple);
-                timetableData.push_back("Course: " + course->getCourseName() + ", Time: " + time->getStartTime() + " - " + time->getEndTime() + ", Room: " + room->getRoomNumber());
             }
         }
+        timetableData.push_back(" Course: " /*+ course->getCourseName()*/);
+       /* timetableData.push_back(" Time: " + time->getStartTime() + " - " + time->getEndTime());
+        timetableData.push_back(" Room: " + room->getRoomNumber());*/
 
         return timetableData;
     }
@@ -415,12 +415,14 @@ string Time::getEndTime()
                 vector<tuple<Course*, Time*, Room*>> courses = studentCoursePair.second;
 
                 string studentname = student->getstudentname();
-                timetableStudent.push_back("Student = "+studentname);
+                timetableStudent.push_back(" Student = "+studentname);
                 for (const auto& courseTimeRoomTuple : courses) {
                     Course* course = get<0>(courseTimeRoomTuple);
                     Time* time = get<1>(courseTimeRoomTuple);
                     Room* room = get<2>(courseTimeRoomTuple);
-                    timetableStudent.push_back("Course = " + course->getCourseName() + "Time = " + time->getStartTime() + " - " + time->getEndTime() + "Room = " + room->getRoomNumber());
+                    timetableStudent.push_back("Course = " + course->getCourseName());
+                    timetableStudent.push_back("Time = " + time->getStartTime() + " - " + time->getEndTime());
+                    timetableStudent.push_back("Room = " + room->getRoomNumber());
                  /*   cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Room: " << room->getRoomNumber() << endl;*/
                 }
                /* cout << endl;*/
@@ -467,7 +469,7 @@ string Time::getEndTime()
             // Iterate over sections for the day
             for (const auto& sectionPair : day.second) {
                 string sectionName = sectionPair.first;
-                timetableSection.push_back(sectionName);
+                timetableSection.push_back("Section" + sectionName);
                 /*cout << "Section: " << sectionName << endl;*/
 
                 // Iterate over courses for the section
@@ -475,7 +477,9 @@ string Time::getEndTime()
                     Course* course = get<0>(courseTimeRoomTuple);
                     Time* time = get<1>(courseTimeRoomTuple);
                     Room* room = get<2>(courseTimeRoomTuple);
-                    timetableSection.push_back("Course: " + course->getCourseName() + " Time: " + time->getStartTime() + " - " + time->getEndTime() + " Room: " + room->getRoomNumber());
+                    timetableSection.push_back("Course: " + course->getCourseName());
+                    timetableSection.push_back(" Time: " + time->getStartTime() + " - " + time->getEndTime());
+                    timetableSection.push_back(" Room: " + room->getRoomNumber());
                     /*cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Room: " << room->getRoomNumber() << endl;*/
                 }
                 /*cout << endl;*/
@@ -599,7 +603,9 @@ string Time::getEndTime()
                     Course* course = get<0>(courseTimeSectionTuple);
                     Time* time = get<1>(courseTimeSectionTuple);
                     Section* section = get<2>(courseTimeSectionTuple);
-                    timetableRoom.push_back("Course: " + course->getCourseName() + " Time : " + time->getStartTime() + " - " + time->getEndTime() + " Section : " + section->getName());
+                    timetableRoom.push_back("Course: " + course->getCourseName());
+                    timetableRoom.push_back(" Time : " + time->getStartTime() + " - " + time->getEndTime());
+                    timetableRoom.push_back(" Section : " + section->getName());
                     //cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Section: " << section->getName() << endl;
                 }
                 //cout << "-----------------------------" << endl;
