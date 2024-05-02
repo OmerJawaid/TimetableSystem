@@ -31,7 +31,6 @@ class Course {      //Managed class having errors after including public ref cla
 
 public:
     std::vector<Student*> enrolledStudents;
-
     Course(int courseCode, const std::string& coursename)
     {     courseCode = courseCode;
         courseName = coursename;
