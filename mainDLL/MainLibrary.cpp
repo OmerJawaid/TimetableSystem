@@ -149,6 +149,11 @@ bool signup(string username, string password)
         name = secname;
     }
 
+    const std::string& Section::getName()
+    {
+        return name;
+    }
+
 
     //Student.cpp
     /*:studentID(ID), name(na), email(mail){}

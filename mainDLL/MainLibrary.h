@@ -96,9 +96,7 @@ private:
 public:
     Section(const std::string& secname);
 
-    const std::string& getName() const {
-        return name;
-    }
+    const std::string& getName();
 
     void addStudent(Student* student) {
         students.push_back(student);
