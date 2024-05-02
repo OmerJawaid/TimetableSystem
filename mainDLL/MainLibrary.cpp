@@ -154,9 +154,6 @@ bool signup(string username, string password)
         //    /*cout << "Room Number doesn't exist. Try Again!" << endl;*/
         //}
     }
-    std::string Room::getRoomNumber() const {
-        return roomNumber;
-    }
 
 //Time.cpp
 string Time::getStartTime()
@@ -243,9 +240,7 @@ string Time::getEndTime()
     }
 
     //Section Class
-    const string& Section::getName() const {
-        return name;
-    }
+    
 
 
 
@@ -325,10 +320,6 @@ string Time::getEndTime()
     //        }
     //    }
     //}
-    string Teacher::getName()
-    {
-        return name;
-    }
 
     vector<string> Timetable::teacherTimetable() {
         vector<string> timetableData;
