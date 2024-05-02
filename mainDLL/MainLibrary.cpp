@@ -172,8 +172,8 @@ string Time::getEndTime()
         name = secname;
     }
 
+    const std::string& Section::getName ()
 
-    const std::string& Section::getName()
     {
         return name;
     }
