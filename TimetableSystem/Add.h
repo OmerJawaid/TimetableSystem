@@ -1,6 +1,7 @@
 #pragma once
 #include "../mainDLL/MainLibrary.h"
 #include"MangedCLass.h"
+#include<string>
 //#include <msclr/marshal_cppstd.h>
 //#include<msclr/marshal_cppstd.h>
 namespace TimetableSystem {
@@ -301,6 +302,7 @@ namespace TimetableSystem {
 			this->comboBox1->TabIndex = 17;
 			this->comboBox1->Text = L" ";
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Add::comboBox1_SelectedIndexChanged);
+			ADDforComboboxStudent(comboBox1);
 			// 
 			// textBox1
 			// 
@@ -465,6 +467,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	label3->Text = "Teacher";
 	label5->Text = "ID";
 	label6->Text = "Email";
+	label7->Text = "Course";
 	label7->Visible = false;
 	label5->Show();
 	label6->Show();
@@ -477,6 +480,8 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	button6->Text = "Create Teacher";
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	AddforComboboxRoom(comboBox2);
+	AddforComboboxTeacher(comboBox1);
 	label3->Text = "Course";
 	label6->Text = "Room";
 	label5->Text = "Course Code";
@@ -566,21 +571,30 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
+		
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 		std::string name(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
-		int coursecode = Convert::ToInt32(textBox2->Text);
-		CourseM^ course1 = gcnew CourseM(coursecode,name);
-		courses->Add(course1);
 		try {
-			course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
-			course1->course->setAssignedRoom(rooms[courseiterator]->room);
-			courseiterator++;
-		}
-				catch(System::Exception^e) {
-						MessageBox::Show("Teacher or Room not assigned to course");
-		}
+			int coursecode = Convert::ToInt32(textBox2->Text);
+			CourseM^ course1 = gcnew CourseM(coursecode, name);
+			courses->Add(course1);
+			try {
+				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
+				course1->course->setAssignedRoom(rooms[courseiterator]->room);
+				courseiterator++;
 			}
+			catch (System::Exception^ e) {
+				MessageBox::Show("Teacher or Room not assigned to course");
+			}
+		}
+		catch (System::Exception^ e)
+		{
+			MessageBox::Show("Enter Course code");
+		}
+		
+		
+	}
 	else if (label3->Text == "Section")
 	{
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
@@ -588,6 +602,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		Marshal::FreeHGlobal(ptr);
 		SectionM^ section = gcnew SectionM(Sectionname);
 		sections->Add(section);
+		ADDforComboboxStudent(comboBox1);
 	}
 else if (label3->Text == "Room")
 	{
@@ -605,5 +620,44 @@ private: System::Void textBox3_TextChanged(System::Object^ sender, System::Event
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+	   void ADDforComboboxStudent(ComboBox^ comboBox)
+	   {
+		   array<String^>^ sectionNames = gcnew array<String^>(sections->Count);
+		   int index = 0;
+		   for each (SectionM ^ section in sections)
+		   {
+			   String^ sectionname=gcnew System::String(section->section->getName().c_str());
+			   sectionNames[index] =sectionname;
+			   index++;
+		   }
+		   //Only Sections
+		   comboBox->Items->AddRange(sectionNames);
+	   }
+	   void AddforComboboxTeacher(ComboBox^ comboBox)
+	   {
+		   array<String^>^ teacherNames = gcnew array<String^>(teachers->Count);
+		   int index = 0;
+		   for each (TeacherM ^ teacher in teachers)
+		   {
+			   String^ teachername = gcnew System::String(teacher->teacher->getName().c_str());
+			   teacherNames[index] = teachername;
+			   index++;
+		   }
+		   comboBox->Items->AddRange(teacherNames);
+	   }
+	   void AddforComboboxRoom(ComboBox^ comboBox)
+	   {
+		   array<String^>^ RoomNames = gcnew array<String^>(rooms->Count);
+		   int index = 0;
+		   for each (RoomM ^ room in rooms)
+		   {
+			   String^ roomname = gcnew System::String(room->room->getRoomNumber().c_str());
+			   RoomNames[index] = roomname;
+			   index++;
+		   }
+		   comboBox->Items->AddRange(RoomNames);
+	   }
 };
+
 }
+

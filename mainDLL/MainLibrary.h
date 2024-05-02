@@ -96,9 +96,7 @@ private:
 public:
     Section(const std::string& secname);
 
-    const std::string& getName() const {
-        return name;
-    }
+    const std::string& getName();
 
     void addStudent(Student* student) {
         students.push_back(student);
@@ -143,10 +141,7 @@ public:
     void assignCourse(Course* course);
     void removeCourse(Course* course);
     void viewCourse(Course* course);
-    std::string getName()
-    {
-        return name;
-    }
+    std::string getName();
 };
 
 class MainLibrary_API Time {

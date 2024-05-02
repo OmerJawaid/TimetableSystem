@@ -143,10 +143,18 @@ bool signup(string username, string password)
         //    /*cout << "Room Number doesn't exist. Try Again!" << endl;*/
         //}
     }
+    std::string Room::getRoomNumber() const {
+        return roomNumber;
+    }
 
     //Section
     Section::Section(const std::string& secname) {
         name = secname;
+    }
+
+    const std::string& Section::getName()
+    {
+        return name;
     }
 
 
@@ -207,6 +215,10 @@ bool signup(string username, string password)
         //for (auto view = coursesTaught.begin(); view != coursesTaught.end(); view++) {
         //    /*std::cout << (*view)->getCourseName() << std::endl;*/
         //}
+    }
+    string Teacher::getName()
+    {
+            return name;
     }
 
 
