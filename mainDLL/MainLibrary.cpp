@@ -143,6 +143,9 @@ bool signup(string username, string password)
         //    /*cout << "Room Number doesn't exist. Try Again!" << endl;*/
         //}
     }
+    std::string Room::getRoomNumber() const {
+        return roomNumber;
+    }
 
     //Section
     Section::Section(const std::string& secname) {
