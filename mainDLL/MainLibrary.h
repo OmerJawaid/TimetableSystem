@@ -32,14 +32,11 @@ class Course {      //Managed class having errors after including public ref cla
 public:
     std::vector<Student*> enrolledStudents;
 
-    Course(/*int courseCode, const std::string& coursename, Teacher* teacher, Room* assignedRoom*/)
-    {
-  /*      courseCode = courseCode;
+    Course(int courseCode, const std::string& coursename)
+    {     courseCode = courseCode;
         courseName = coursename;
-        teacher = teacher;
-        assignedRoom = assignedRoom;
         assignedSection = nullptr;
-        assignedTime = nullptr;*/
+        assignedTime = nullptr;
     };
 
     void addStudent(Student* student);
@@ -60,7 +57,12 @@ public:
     }*/
     Time* getAssignedTime() const;
     /*void setAssignedSection(Section* section);*/
-    void setAssignedRoom(Room* room);
+    void setAssignedRoom(Room* room) {
+        assignedRoom= room;
+    }
+    void teacherAssignCourse(Teacher* teacher) {
+        		this->teacher = teacher;
+    }
 
     std::vector<Student*> getEnrolledStudents() const;
 };
@@ -76,7 +78,7 @@ private:
     std::vector<std::string> available_labs;
 
 public:
-    Room(); Room(std::string r_no, int cap) : roomNumber(r_no), capacity(cap) {}
+    Room(std::string r_no, int cap);
     void displayRooms_available();
     void assignRoom(Course* course);
     bool checkAvailabitiy(std::string room_number);
@@ -92,9 +94,9 @@ private:
     std::vector<Student*> students;
 
 public:
-    Section(const std::string& name) : name(name) {}
+    Section(const std::string& secname);
 
-    const std::string& getName() const;
+    const std::string& getName();
 
     void addStudent(Student* student) {
         students.push_back(student);
@@ -120,12 +122,13 @@ private:
 
 public:
     std::vector<Course*>coursesEnrolled;
-    Student(int ID, std::string na, std::string mail, std::string sec) :studentID(ID), name(na), email(mail), section(sec) {};
+    Student(int ID, std::string na, std::string mail);
     void enrollCourse(Course* course);
     void dropCourse(Course* course);
     void viewCourses(Course* course);
     std::string getstudentname();
     std::string getsection()const;
+    void AssignSection(Section* section);
 };
 
 class MainLibrary_API Teacher {

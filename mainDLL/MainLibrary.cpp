@@ -83,9 +83,9 @@ bool signup(string username, string password)
     }
 
 
-    void Course::setAssignedRoom(Room* room) {
+   /* void Course::setAssignedRoom(Room* room) {
         room = assignedRoom;
-    }
+    }*/
 
     vector<Student*> Course::getEnrolledStudents() const {
         return enrolledStudents;
@@ -104,6 +104,11 @@ bool signup(string username, string password)
     {
         return roomNumber;
     }
+    Room::Room(string r_no, int cap) {
+        roomNumber = r_no;
+        capacity = cap;
+    }
+
     void Room::displayRooms_available() {
        /* cout << "Rooms available: " << endl;*/
         for (int i = 0; i < rooms_available.size(); i++) {
@@ -149,6 +154,9 @@ bool signup(string username, string password)
         //    /*cout << "Room Number doesn't exist. Try Again!" << endl;*/
         //}
     }
+    std::string Room::getRoomNumber() const {
+        return roomNumber;
+    }
 
 //Time.cpp
 string Time::getStartTime()
@@ -159,11 +167,27 @@ string Time::getEndTime()
 {
     return endTime;
 }
+    //Section
+    Section::Section(const std::string& secname) {
+        name = secname;
+    }
 
+
+    const std::string& Section::getName()
+    {
+        return name;
+    }
 
 
     //Student.cpp
-
+    /*:studentID(ID), name(na), email(mail){}
+    */
+    Student::Student(int ID, string na, string mail)
+    {
+        studentID = ID;
+        name = na;
+        email = mail;
+    }
     void Student::enrollCourse(Course* course) {
         coursesEnrolled.push_back(course);
     }
@@ -185,11 +209,14 @@ string Time::getEndTime()
     string Student::getsection() const {
         return section;
     }
+    void Student::AssignSection(Section* section) {
+        		section = section;
+    }
 
 
 
     //Teacher.cpp
-    Teacher::Teacher(std::string n, int ID, std::string em) : name(n), teacherID(ID), email(em) {}
+    Teacher::Teacher(std::string n, int ID, std::string em) : name(/*n*/), teacherID(/*ID*/), email(/*em*/) {}
 
     void Teacher::assignCourse(Course* course) {
         coursesTaught.push_back(course);
@@ -206,9 +233,13 @@ string Time::getEndTime()
 
     void Teacher::viewCourse(Course* course) {
         /*std::cout << "Courses Taught by " << name << " are:" << std::endl;*/
-        for (auto view = coursesTaught.begin(); view != coursesTaught.end(); view++) {
-            /*std::cout << (*view)->getCourseName() << std::endl;*/
-        }
+        //for (auto view = coursesTaught.begin(); view != coursesTaught.end(); view++) {
+        //    /*std::cout << (*view)->getCourseName() << std::endl;*/
+        //}
+    }
+    string Teacher::getName()
+    {
+            return name;
     }
 
     //Section Class
