@@ -255,6 +255,7 @@ namespace TimetableSystem {
 			this->button6->Text = L"Person Name and username change username";
 			this->button6->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &Dashboard::button6_Click);
 			// 
 			// Dashboard
 			// 
@@ -303,6 +304,8 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
 	obj->Show();
+}
+private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

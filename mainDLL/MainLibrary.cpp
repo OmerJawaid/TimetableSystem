@@ -46,6 +46,7 @@ bool signup(string username, string password)
 
 
     //Course class
+
     void Course::addStudent(Student* student) {
         enrolledStudents.push_back(student);
     }
@@ -62,9 +63,9 @@ bool signup(string username, string password)
         }
     }
 
-    std::string Course::getCourseName() const {
-        return courseName;
-    }
+    //std::string Course::getCourseName() const {
+    //    return courseName;
+    //}
 
     int Course::getCourseCode() const {
         return courseCode;

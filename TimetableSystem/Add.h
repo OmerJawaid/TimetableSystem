@@ -1,6 +1,8 @@
 #pragma once
 #include "../mainDLL/MainLibrary.h"
 #include"MangedCLass.h"
+#include"MoreFunctionallityCourse.h"
+#include"MoreFunctionalityStudent.h"
 #include<string>
 //#include <msclr/marshal_cppstd.h>
 //#include<msclr/marshal_cppstd.h>
@@ -18,6 +20,7 @@ namespace TimetableSystem {
 	/// <summary>
 	/// Summary for Add
 	/// </summary>
+	/*public ref class MoreFunctionallityCourse;*/
 	public ref class Add : public System::Windows::Forms::Form
 	{
 		List<CourseM^>^ courses = gcnew List<CourseM^>();
@@ -30,6 +33,9 @@ namespace TimetableSystem {
 		int roomiterator = 0;
 		int studentiterator = 0;
 	private: System::Windows::Forms::ComboBox^ comboBox3;
+	private: System::Windows::Forms::Button^ button8;
+
+
 	public:
 		Form^ obj;
 		Add(void)
@@ -51,6 +57,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/
+
 		}
 
 	protected:
@@ -92,7 +99,7 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 	private: System::Windows::Forms::Button^ button6;
 	private: System::Windows::Forms::Button^ button7;
-	private: System::ComponentModel::BackgroundWorker^ backgroundWorker1;
+
 	protected:
 
 	private:
@@ -132,8 +139,8 @@ namespace TimetableSystem {
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
+			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -313,7 +320,7 @@ namespace TimetableSystem {
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(509, 304);
+			this->comboBox1->Location = System::Drawing::Point(509, 291);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(209, 21);
 			this->comboBox1->TabIndex = 17;
@@ -322,7 +329,7 @@ namespace TimetableSystem {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(214, 228);
+			this->textBox1->Location = System::Drawing::Point(214, 215);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(201, 20);
 			this->textBox1->TabIndex = 18;
@@ -336,7 +343,7 @@ namespace TimetableSystem {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(222, 209);
+			this->label4->Location = System::Drawing::Point(222, 196);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(48, 16);
 			this->label4->TabIndex = 19;
@@ -350,7 +357,7 @@ namespace TimetableSystem {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(222, 285);
+			this->label5->Location = System::Drawing::Point(222, 273);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(80, 16);
 			this->label5->TabIndex = 20;
@@ -358,7 +365,7 @@ namespace TimetableSystem {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(214, 304);
+			this->textBox2->Location = System::Drawing::Point(214, 292);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(201, 20);
 			this->textBox2->TabIndex = 21;
@@ -371,7 +378,7 @@ namespace TimetableSystem {
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label6->ForeColor = System::Drawing::Color::White;
-			this->label6->Location = System::Drawing::Point(516, 209);
+			this->label6->Location = System::Drawing::Point(516, 196);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(46, 16);
 			this->label6->TabIndex = 22;
@@ -379,7 +386,7 @@ namespace TimetableSystem {
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(509, 228);
+			this->textBox3->Location = System::Drawing::Point(509, 215);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(209, 20);
 			this->textBox3->TabIndex = 23;
@@ -393,7 +400,7 @@ namespace TimetableSystem {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(516, 285);
+			this->label7->Location = System::Drawing::Point(516, 273);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(59, 16);
 			this->label7->TabIndex = 24;
@@ -406,16 +413,16 @@ namespace TimetableSystem {
 			this->listBox5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->listBox5->FormattingEnabled = true;
-			this->listBox5->Location = System::Drawing::Point(187, 175);
+			this->listBox5->Location = System::Drawing::Point(187, 162);
 			this->listBox5->Name = L"listBox5";
-			this->listBox5->Size = System::Drawing::Size(552, 212);
+			this->listBox5->Size = System::Drawing::Size(552, 225);
 			this->listBox5->TabIndex = 25;
 			this->listBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &Add::listBox5_SelectedIndexChanged);
 			// 
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Location = System::Drawing::Point(509, 227);
+			this->comboBox2->Location = System::Drawing::Point(509, 215);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(209, 21);
 			this->comboBox2->TabIndex = 26;
@@ -454,16 +461,34 @@ namespace TimetableSystem {
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
-			this->comboBox3->Location = System::Drawing::Point(509, 304);
+			this->comboBox3->Location = System::Drawing::Point(509, 291);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(209, 21);
 			this->comboBox3->TabIndex = 29;
+			// 
+			// button8
+			// 
+			this->button8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->button8->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->button8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button8->ForeColor = System::Drawing::Color::Black;
+			this->button8->Location = System::Drawing::Point(587, 341);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(131, 27);
+			this->button8->TabIndex = 30;
+			this->button8->Text = L"More";
+			this->button8->UseVisualStyleBackColor = false;
+			this->button8->Click += gcnew System::EventHandler(this, &Add::button8_Click);
 			// 
 			// Add
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(777, 485);
+			this->Controls->Add(this->button8);
 			this->Controls->Add(this->comboBox3);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
@@ -517,6 +542,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = true;
 	comboBox3->Visible = false;
 	button6->Text = "Create Teacher";
+	button8->Visible = false;
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	AddforComboboxRoom(comboBox2);
@@ -535,6 +561,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = true;
 	comboBox3->Visible = true;
 	button6->Text = "Create Course";
+	button8->Visible = true;
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	label3->Text = "Student";
@@ -551,6 +578,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = true;
 	comboBox3->Visible = false;
 	button6->Text = "Create Student";
+	button8->Visible = true;
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	label3->Text = "Section";
@@ -564,6 +592,7 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = false;
 	comboBox3->Visible = false;
 	button6->Text = "Create Section";
+	button8->Visible = false;
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 	label3->Text = "Room";
@@ -578,43 +607,45 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = false;
 	comboBox3->Visible = false;
 	button6->Text= "Create Room";
+	button8->Visible = false;
 }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (label3->Text == "Student")
 	{
-		int enrollment;
 		try {
-			enrollment = Convert::ToInt32(textBox2->Text);
+			int enrollment = Convert::ToInt32(textBox2->Text);
+
+
+			IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+			std::string studentname(static_cast<const char*>(ptr.ToPointer()));
+			Marshal::FreeHGlobal(ptr);
+
+			ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
+			std::string studentemail(static_cast<const char*>(ptr.ToPointer()));
+			Marshal::FreeHGlobal(ptr);
+
+			if (textBox1->Text != "" || textBox3->Text != "") {
+				StudentM^ student = gcnew StudentM(enrollment, studentname, studentemail);
+				students->Add(student);
+
+				try {
+					student->student->AssignSection(sections[studentiterator]->section);
+				}
+				catch (Exception^ e) {
+					MessageBox::Show("Section not selected");
+				}
+			}
+			else {
+				if (textBox1->Text == "") {
+					MessageBox::Show("Name is Empty");
+				}
+				if (textBox3->Text == "") {
+					MessageBox::Show("Email is Empty");
+				}
+			}
 		}
 		catch (Exception^ e) {
 			MessageBox::Show("Enrollment is empty");
-		}
-		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
-		std::string studentname(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-
-		ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
-		std::string studentemail(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-
-		if (textBox1->Text !=""||textBox3->Text!="") {
-			StudentM^ student = gcnew StudentM(enrollment, studentname, studentemail);
-			students->Add(student);
-			
-			try {
-				student->student->AssignSection(sections[studentiterator]->section);
-			}
-			catch (Exception^ e) {
-				MessageBox::Show("Section not selected");
-			}
-		}
-		else {
-			if (textBox1->Text == "") {
-				MessageBox::Show("Name is Empty");
-			}
-			if (textBox3->Text == "") {
-				MessageBox::Show("Email is Empty");
-			}
 		}
 		textBox1->Text = "";
 		textBox2->Text = "";
@@ -692,12 +723,24 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 else if (label3->Text == "Room")
 	{
-		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
-		std::string Roomnumber(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-		int capacity = Convert::ToInt64(textBox2->Text);
-		RoomM^ room = gcnew RoomM(Roomnumber,capacity );
-		rooms->Add(room);
+		try {
+			if (textBox1->Text != "")
+			{
+				IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+				std::string Roomnumber(static_cast<const char*>(ptr.ToPointer()));
+				Marshal::FreeHGlobal(ptr);
+
+				int capacity = Convert::ToInt64(textBox2->Text);
+				RoomM^ room = gcnew RoomM(Roomnumber, capacity);
+				rooms->Add(room);
+			}
+			else
+				MessageBox::Show("Roomnumber is empty");
+		}
+		catch (Exception^ e)
+		{
+			MessageBox::Show("Capacity is empty");
+		}
 		textBox1->Text = "";
 		textBox2->Text = "";
 		textBox3->Text = "";
@@ -753,6 +796,21 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 		   comboBox->Items->AddRange(RoomNames);
 	   }
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (label3->Text == "Course")
+	{
+		this->Hide();
+		MoreFunctionallityCourse^ CourseFunc;
+		CourseFunc = gcnew MoreFunctionallityCourse(students,courses);
+		CourseFunc->ShowDialog();
+	}
+	else if (label3->Text=="Student")
+	{
+		/*this->Hide();
+		MoreFunctionalityStudent StudentFunc;
+		StudentFunc.ShowDialog();*/
+	}
 }
 };
 

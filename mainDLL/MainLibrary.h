@@ -32,17 +32,21 @@ class Course {      //Managed class having errors after including public ref cla
 public:
     std::vector<Student*> enrolledStudents;
     Course(int courseCode, const std::string& coursename)
-    {     courseCode = courseCode;
+    {
+        courseCode = courseCode;
         courseName = coursename;
         assignedSection = nullptr;
         assignedTime = nullptr;
     };
 
+
     void addStudent(Student* student);
     void removeStudent(Student* student);
     void viewStudents() const;
 
-    std::string getCourseName() const;
+    std::string getCourseName() const {
+        return courseName;
+    }
     int getCourseCode() const;
     Teacher* getTeacher() const;
     Room* getAssignedRoom() const;
