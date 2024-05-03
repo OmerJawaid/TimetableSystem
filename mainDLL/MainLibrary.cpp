@@ -213,7 +213,7 @@ string Time::getEndTime()
 
 
     //Teacher.cpp
-    Teacher::Teacher(std::string n, int ID, std::string em) : name(/*n*/), teacherID(/*ID*/), email(/*em*/) {}
+    Teacher::Teacher(std::string n, int ID, std::string em) : name(n), teacherID(ID), email(em) {}
 
     void Teacher::assignCourse(Course* course) {
         coursesTaught.push_back(course);

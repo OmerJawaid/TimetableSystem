@@ -29,6 +29,7 @@ namespace TimetableSystem {
 		int teacheriterator = 0;
 		int roomiterator = 0;
 		int studentiterator = 0;
+	private: System::Windows::Forms::ComboBox^ comboBox3;
 	public:
 		Form^ obj;
 		Add(void)
@@ -132,6 +133,7 @@ namespace TimetableSystem {
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -306,6 +308,7 @@ namespace TimetableSystem {
 			this->label3->Size = System::Drawing::Size(93, 25);
 			this->label3->TabIndex = 12;
 			this->label3->Text = L"Student";
+			this->label3->Click += gcnew System::EventHandler(this, &Add::label3_Click);
 			// 
 			// comboBox1
 			// 
@@ -316,7 +319,6 @@ namespace TimetableSystem {
 			this->comboBox1->TabIndex = 17;
 			this->comboBox1->Text = L" ";
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Add::comboBox1_SelectedIndexChanged);
-			ADDforComboboxStudent(comboBox1);
 			// 
 			// textBox1
 			// 
@@ -449,11 +451,20 @@ namespace TimetableSystem {
 			this->button7->UseVisualStyleBackColor = false;
 			this->button7->Click += gcnew System::EventHandler(this, &Add::button7_Click);
 			// 
+			// comboBox3
+			// 
+			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Location = System::Drawing::Point(509, 304);
+			this->comboBox3->Name = L"comboBox3";
+			this->comboBox3->Size = System::Drawing::Size(209, 21);
+			this->comboBox3->TabIndex = 29;
+			// 
 			// Add
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(777, 485);
+			this->Controls->Add(this->comboBox3);
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->label7);
@@ -492,23 +503,24 @@ namespace TimetableSystem {
 	}
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	label3->Text = "Teacher";
+	label4->Text = "Name";
 	label5->Text = "ID";
 	label6->Text = "Email";
-	label7->Text = "Course";
-	label7->Visible = false;
+	label7->Text = "";
 	label5->Show();
 	label6->Show();
 	label7->Show();
 	textBox1->Visible = true;
 	textBox2->Visible = true;
 	textBox3->Visible = true;
-	comboBox1->Visible = true;
+	comboBox1->Visible = false;
 	comboBox2->Visible = true;
+	comboBox3->Visible = false;
 	button6->Text = "Create Teacher";
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	AddforComboboxRoom(comboBox2);
-	AddforComboboxTeacher(comboBox1);
+	AddforComboboxTeacher(comboBox3);
 	label3->Text = "Course";
 	label6->Text = "Room";
 	label5->Text = "Course Code";
@@ -519,8 +531,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	textBox1->Visible = true;
 	textBox2->Visible = true;
 	textBox3->Visible = false;
-	comboBox1->Visible = true;
+	comboBox1->Visible = false;
 	comboBox2->Visible = true;
+	comboBox3->Visible = true;
 	button6->Text = "Create Course";
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -536,6 +549,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	textBox2->Visible = true;
 	comboBox1->Visible = true;
 	comboBox2->Visible = true;
+	comboBox3->Visible = false;
 	button6->Text = "Create Student";
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -548,6 +562,7 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	textBox3->Visible = false;
 	comboBox1->Visible = false;
 	comboBox2->Visible = false;
+	comboBox3->Visible = false;
 	button6->Text = "Create Section";
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -561,13 +576,19 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	textBox2->Visible = true;
 	comboBox1->Visible = false;
 	comboBox2->Visible = false;
+	comboBox3->Visible = false;
 	button6->Text= "Create Room";
 }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (label3->Text == "Student")
 	{
-		int enrollment = Convert::ToInt32(textBox2->Text);
-
+		int enrollment;
+		try {
+			enrollment = Convert::ToInt32(textBox2->Text);
+		}
+		catch (Exception^ e) {
+			MessageBox::Show("Enrollment is empty");
+		}
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 		std::string studentname(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
@@ -576,25 +597,58 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		std::string studentemail(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
 
-
-		StudentM^ student = gcnew StudentM(enrollment,studentname,studentemail);
-		students->Add(student);
-
-		student->student->AssignSection(sections[studentiterator]->section);
+		if (textBox1->Text !=""||textBox3->Text!="") {
+			StudentM^ student = gcnew StudentM(enrollment, studentname, studentemail);
+			students->Add(student);
+			
+			try {
+				student->student->AssignSection(sections[studentiterator]->section);
+			}
+			catch (Exception^ e) {
+				MessageBox::Show("Section not selected");
+			}
+		}
+		else {
+			if (textBox1->Text == "") {
+				MessageBox::Show("Name is Empty");
+			}
+			if (textBox3->Text == "") {
+				MessageBox::Show("Email is Empty");
+			}
+		}
+		textBox1->Text = "";
+		textBox2->Text = "";
+		textBox3->Text = "";
+		comboBox1->SelectedItem = "";
 	}
 	else if (label3->Text == "Teacher")
 	{
-		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
-		std::string teachername(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-
-		int ID = Convert::ToInt32(textBox2->Text);
-
-		ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
-		std::string teacheremail(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-		TeacherM^ teacher = gcnew TeacherM(teachername,ID,teacheremail);
-		teachers->Add(teacher);
+		if (textBox1->Text != "") {
+			IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+			std::string teachername(static_cast<const char*>(ptr.ToPointer()));
+			Marshal::FreeHGlobal(ptr);
+			try {
+				int ID = Convert::ToInt32(textBox2->Text);
+				if (textBox3->Text != "")
+				{
+					ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
+					std::string teacheremail(static_cast<const char*>(ptr.ToPointer()));
+					Marshal::FreeHGlobal(ptr);
+					TeacherM^ teacher = gcnew TeacherM(teachername, ID, teacheremail);
+					teachers->Add(teacher);
+				}
+				else
+					MessageBox::Show("Email is empty");
+			}
+			catch (Exception^ e) {
+				MessageBox::Show("ID is empty");
+			}
+		}
+		else
+			MessageBox::Show("Teacher Name is Empty");
+		textBox1->Text = "";
+		textBox2->Text = "";
+		textBox3->Text = "";
 	}
 	else if (label3->Text == "Course")
 	{
@@ -620,7 +674,9 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			MessageBox::Show("Enter Course code");
 		}
 		
-		
+		textBox1->Text = "";
+		textBox2->Text = "";
+		textBox3->Text = "";
 	}
 	else if (label3->Text == "Section")
 	{
@@ -630,6 +686,9 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		SectionM^ section = gcnew SectionM(Sectionname);
 		sections->Add(section);
 		ADDforComboboxStudent(comboBox1);
+		textBox1->Text = "";
+		textBox2->Text = "";
+		textBox3->Text = "";
 	}
 else if (label3->Text == "Room")
 	{
@@ -639,6 +698,9 @@ else if (label3->Text == "Room")
 		int capacity = Convert::ToInt64(textBox2->Text);
 		RoomM^ room = gcnew RoomM(Roomnumber,capacity );
 		rooms->Add(room);
+		textBox1->Text = "";
+		textBox2->Text = "";
+		textBox3->Text = "";
 	}
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -687,8 +749,11 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 			   RoomNames[index] = roomname;
 			   index++;
 		   }
+		   
 		   comboBox->Items->AddRange(RoomNames);
 	   }
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 
 }
