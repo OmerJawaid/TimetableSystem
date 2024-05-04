@@ -596,9 +596,9 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		ptr = Marshal::StringToHGlobalAnsi(textBox3->Text);
 		std::string studentemail(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
-
+		std::string section = sections[studentiterator]->section->getName();
 		if (textBox1->Text !=""||textBox3->Text!="") {
-			StudentM^ student = gcnew StudentM(enrollment, studentname, studentemail);
+			StudentM^ student = gcnew StudentM(enrollment, studentname, studentemail , section);
 			students->Add(student);
 			
 			try {
@@ -658,7 +658,9 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		Marshal::FreeHGlobal(ptr);
 		try {
 			int coursecode = Convert::ToInt32(textBox2->Text);
-			CourseM^ course1 = gcnew CourseM(coursecode, name);
+			Teacher* teacher = teachers[courseiterator]->teacher;
+             Room* room = rooms[courseiterator]->room;
+			CourseM^ course1 = gcnew CourseM(coursecode, name,teacher,room);
 			courses->Add(course1);
 			try {
 				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);

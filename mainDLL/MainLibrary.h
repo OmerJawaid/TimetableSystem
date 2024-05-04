@@ -31,12 +31,8 @@ class Course {      //Managed class having errors after including public ref cla
 
 public:
     std::vector<Student*> enrolledStudents;
-    Course(int courseCode, const std::string& coursename)
-    {     courseCode = courseCode;
-        courseName = coursename;
-        assignedSection = nullptr;
-        assignedTime = nullptr;
-    };
+    Course(int courseCode, const std::string& courseName, Teacher* teacher, Room* assignedRoom)
+        : courseCode(courseCode), courseName(courseName), teacher(teacher), assignedRoom(assignedRoom), assignedSection(nullptr), assignedTime(nullptr) {}
 
     void addStudent(Student* student);
     void removeStudent(Student* student);
@@ -97,9 +93,8 @@ public:
 
     const std::string& getName();
 
-    void addStudent(Student* student) {
-        students.push_back(student);
-    }
+    void addStudent(Student* student);
+     
 
     void removeStudent(Student* student) {
         auto it = find(students.begin(), students.end(), student);
@@ -121,7 +116,7 @@ private:
 
 public:
     std::vector<Course*>coursesEnrolled;
-    Student(int ID, std::string na, std::string mail);
+    Student(int ID, std::string na, std::string mail , std::string Section);
     void enrollCourse(Course* course);
     void dropCourse(Course* course);
     void viewCourses(Course* course);
@@ -147,7 +142,7 @@ class MainLibrary_API Time {
 private:
     std::string startTime, endTime;
 public:
-    Time(std::string start, std::string end) :startTime(start), endTime(end) {};
+    Time(std::string start, std::string end); /*:startTime(start), endTime(end) {};*/
     std::string getStartTime();
     std::string getEndTime();
 };

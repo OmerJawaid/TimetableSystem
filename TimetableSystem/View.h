@@ -70,6 +70,11 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::ListBox^ listBox2;
 
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 
 
 
@@ -114,6 +119,12 @@ namespace TimetableSystem {
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label2
@@ -259,18 +270,52 @@ namespace TimetableSystem {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(257, 143);
+			this->label3->Location = System::Drawing::Point(185, 148);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(35, 13);
 			this->label3->TabIndex = 25;
 			this->label3->Text = L"label3";
 			this->label3->Click += gcnew System::EventHandler(this, &View::label3_Click);
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->Column1,
+					this->Column2, this->Column3, this->Column4
+			});
+			this->dataGridView1->Location = System::Drawing::Point(242, 235);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(445, 150);
+			this->dataGridView1->TabIndex = 26;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &View::dataGridView1_CellContentClick_1);
+			// 
+			// Column1
+			// 
+			this->Column1->HeaderText = L"Teacher";
+			this->Column1->Name = L"Column1";
+			// 
+			// Column2
+			// 
+			this->Column2->HeaderText = L"Course";
+			this->Column2->Name = L"Column2";
+			// 
+			// Column3
+			// 
+			this->Column3->HeaderText = L"Time";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"Room";
+			this->Column4->Name = L"Column4";
+			// 
 			// View
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(792, 417);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -286,6 +331,7 @@ namespace TimetableSystem {
 			this->Name = L"View";
 			this->Text = L"View";
 			this->Load += gcnew System::EventHandler(this, &View::View_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -311,8 +357,29 @@ private: System::Void button5_Click_1(System::Object^ sender, System::EventArgs^
 			teacherList->Add(teacherString);
 		}
 		System::String^ teacherString = String::Join(", ", teacherList);
-
 		label3->Text = teacherString;
+
+		//this->dataGridView1->Columns->Clear(); // Clear existing columns
+		//this->dataGridView1->Columns->Add("Teacher", "Teacher");
+		//this->dataGridView1->Columns->Add("CourseName", "Course Name");
+		//this->dataGridView1->Columns->Add("Time", "Time");
+		////this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Add("Room", "Room");
+
+		//array<System::String^>^ teacherArray = teacherString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+		//int count = 0;
+		//for (int i = 0; i < 2 ; i++) {
+		//	DataGridViewRow^ row = gcnew DataGridViewRow();
+		//	row->CreateCells(dataGridView1);
+
+		//	row->Cells[0]->Value = teacherArray[count];
+		//	row->Cells[1]->Value = teacherArray[count + 1];
+		//	row->Cells[2]->Value = teacherArray[count + 2];
+		//	row->Cells[3]->Value = teacherArray[count + 3];
+
+		//	this->dataGridView1->Rows->Add(row);
+		//	count += 4;
+		//}
 	}
 private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	
@@ -320,18 +387,38 @@ private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, Syst
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	TimetableM^ timetable = gcnew TimetableM();
 	std::vector<std::string> studentVector = timetable->timetable->studentTimetable();
-
-	// Create a List to store System::String^
 	System::Collections::Generic::List<System::String^>^ studentList = gcnew System::Collections::Generic::List<System::String^>();
 
-	// Convert each std::string to System::String^ and add to the list
 	for (const std::string& teacher : studentVector) {
 		System::String^ teacherString = gcnew System::String(teacher.c_str());
 		studentList->Add(teacherString);
 	}
 	System::String^ studentString = String::Join(", ", studentList);
-
 	label3->Text = studentString;
+
+
+
+	//this->dataGridView1->Columns->Clear(); // Clear existing columns
+	//this->dataGridView1->Columns->Add("Student", "Student");
+	//this->dataGridView1->Columns->Add("Course", "Course");
+	//this->dataGridView1->Columns->Add("Time", "Time");
+	////this->dataGridView1->Columns->Add("Time", "Time");
+	//this->dataGridView1->Columns->Add("Room", "Room");
+
+	//array<System::String^>^ teacherArray = studentString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+	//int count = 0;
+	//for (int i = 0; i < 2; i++) {
+	//	DataGridViewRow^ row = gcnew DataGridViewRow();
+	//	row->CreateCells(dataGridView1);
+
+	//	row->Cells[0]->Value = teacherArray[count];
+	//	row->Cells[1]->Value = teacherArray[count + 1];
+	//	row->Cells[2]->Value = teacherArray[count + 2];
+	//	row->Cells[3]->Value = teacherArray[count + 3];
+
+	//	this->dataGridView1->Rows->Add(row);
+	//	count += 4;
+	//}
 }
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -356,6 +443,32 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	System::String^ roomString = String::Join(", ", roomList);
 
 	label3->Text = roomString;
+
+
+
+	//this->dataGridView1->Columns->Clear(); // Clear existing columns
+	//this->dataGridView1->Columns->Add("Student", "Student");
+	//this->dataGridView1->Columns->Add("Course", "Course");
+	//this->dataGridView1->Columns->Add("Time", "Time");
+	////this->dataGridView1->Columns->Add("Time", "Time");
+	//this->dataGridView1->Columns->Add("Room", "Room");
+
+	//array<System::String^>^ teacherArray = roomString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+	//int count = 0;
+	//for (int i = 0; i < 2; i++) {
+	//	DataGridViewRow^ row = gcnew DataGridViewRow();
+	//	row->CreateCells(dataGridView1);
+
+	//	row->Cells[0]->Value = teacherArray[count];
+	//	row->Cells[1]->Value = teacherArray[count + 1];
+	//	row->Cells[2]->Value = teacherArray[count + 2];
+	//	row->Cells[3]->Value = teacherArray[count + 3];
+
+	//	this->dataGridView1->Rows->Add(row);
+	//	count += 4;
+	//}
+}
+private: System::Void dataGridView1_CellContentClick_1(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 }
 };
 }
