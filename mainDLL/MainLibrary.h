@@ -40,7 +40,9 @@ public:
     };
 
 
-    void addStudent(Student* student);
+    void addStudent(Student* student) {
+            enrolledStudents.push_back(student);
+    }
     void removeStudent(Student* student);
     void viewStudents() const;
 

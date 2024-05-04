@@ -4,6 +4,9 @@
 #include"MoreFunctionallityCourse.h"
 #include"MoreFunctionalityStudent.h"
 #include<string>
+#include<fstream>
+
+//#include<sstream>
 //#include <msclr/marshal_cppstd.h>
 //#include<msclr/marshal_cppstd.h>
 namespace TimetableSystem {
@@ -16,6 +19,7 @@ namespace TimetableSystem {
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic;
 	using namespace Runtime::InteropServices;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for Add
@@ -810,8 +814,32 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 		/*this->Hide();
 		MoreFunctionalityStudent StudentFunc;
 		StudentFunc.ShowDialog();*/
+		outputfilehandling();
 	}
 }
+	   void outputfilehandling()
+	   {
+
+		   // Convert System::String^ to const char*
+		   String^ fileName = "Student.txt";
+
+		   try
+		   {
+			   // Write data to the file
+			   StreamWriter^ sw = gcnew StreamWriter(fileName,std::ios::out|std::ios::trunc);
+			   sw->WriteLine("Hello, world!");
+			   sw->WriteLine("This is a test file.");
+			   sw->Close();
+
+			   // Show a message box indicating success
+			   MessageBox::Show("File 'Student.txt' written successfully.");
+		   }
+		   catch (Exception^ e)
+		   {
+			   // Show a message box indicating failure
+			   MessageBox::Show("Error: Unable to write to file 'Student.txt'.");
+		   }
+	   }
 };
 
 }

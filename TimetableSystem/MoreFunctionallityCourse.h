@@ -1,6 +1,6 @@
 #pragma once
 #include"MangedClass.h"
-
+#include"../mainDLL/MainLibrary.h"
 namespace TimetableSystem {
 
 	using namespace System;
@@ -49,7 +49,7 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::ListBox^ listBox5;
 	private: System::Windows::Forms::ComboBox^ comboBox3;
 	private: System::Windows::Forms::Label^ label7;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+
 	private: System::Windows::Forms::ListView^ listView1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Button^ button4;
@@ -61,6 +61,7 @@ namespace TimetableSystem {
 		List<StudentM^>^ students = gcnew List<StudentM^>(); List<CourseM^>^ courses = gcnew List<CourseM^>();
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
+
 		   /// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -85,7 +86,6 @@ namespace TimetableSystem {
 			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button4 = (gcnew System::Windows::Forms::Button());
@@ -233,10 +233,11 @@ namespace TimetableSystem {
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
-			this->comboBox3->Location = System::Drawing::Point(234, 267);
+			this->comboBox3->Location = System::Drawing::Point(359, 249);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(209, 21);
 			this->comboBox3->TabIndex = 30;
+			this->comboBox3->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::comboBox3_SelectedIndexChanged);
 			AddforComboboxStudent(comboBox3);
 			// 
 			// label7
@@ -247,22 +248,12 @@ namespace TimetableSystem {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(296, 248);
+			this->label7->Location = System::Drawing::Point(425, 230);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(67, 16);
 			this->label7->TabIndex = 31;
 			this->label7->Text = L"Students";
 			this->label7->Click += gcnew System::EventHandler(this, &MoreFunctionallityCourse::label7_Click);
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(359, 294);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(209, 21);
-			this->comboBox1->TabIndex = 32;
-			this->comboBox1->Visible = false;
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::comboBox1_SelectedIndexChanged);
 			// 
 			// listView1
 			// 
@@ -273,6 +264,7 @@ namespace TimetableSystem {
 			this->listView1->TabIndex = 33;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->Visible = false;
+			this->listView1->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::listView1_SelectedIndexChanged);
 			// 
 			// label3
 			// 
@@ -340,7 +332,7 @@ namespace TimetableSystem {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(565, 299);
+			this->label5->Location = System::Drawing::Point(428, 283);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(64, 16);
 			this->label5->TabIndex = 38;
@@ -349,7 +341,7 @@ namespace TimetableSystem {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Location = System::Drawing::Point(493, 321);
+			this->comboBox2->Location = System::Drawing::Point(359, 302);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(209, 21);
 			this->comboBox2->TabIndex = 39;
@@ -367,7 +359,6 @@ namespace TimetableSystem {
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->comboBox3);
 			this->Controls->Add(this->listBox4);
@@ -391,7 +382,6 @@ namespace TimetableSystem {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		listView1->Visible = false;
 		label3->Hide();
-		comboBox1->Visible = false;
 		comboBox3->Visible = true;
 		label7->Visible = true;
 		button4->Text = "Add Student";
@@ -400,47 +390,73 @@ namespace TimetableSystem {
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	listView1->Visible = false;
 	label3->Hide();
-	comboBox1->Visible = true;
 	comboBox3->Visible = false;
-	label7->Visible = true;
-	button4->Text = "Remove Student";
-	label3->Text = "Remove Student";
+	label7->Visible = false;
+	button4->Text = "Select Course";
+	label4->Text = "Select Course";
+	/*AddforComboboxCourse(comboBox2);*/
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	listView1->Visible = true;
-	label3->Show();
-	comboBox1->Visible = false;
+	listView1->Visible = false;
+	label3->Hide();
 	comboBox3->Visible = false;
 	label7->Visible = false;
 	button4->Text = "View";
-	label3->Text = "View Students";
+	label4->Text = "View Students";
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (label3->Text == "Add Student")
+	if (label4->Text == "Select Course")
+	{
+		/*label4->Text = "Remove Student";
+			String^ name = comboBox2->SelectedItem->ToString();
+		for each (CourseM ^ course in courses) {
+			String^ courseName = gcnew String(course->course->getCourseName().c_str());
+			if (name = courseName) {
+				button4->Text = "Remove Student";
+				label7->Show();
+				comboBox3->Visible = true;
+				AddforComboboxStudentremove(comboBox3, course);
+				break;
+			}
+		}*/
+	}
+	else if (label4->Text == "Add Student")
 	{
 		int index = 0;
 		for each (StudentM ^ student in students) {
-			String^ name = comboBox3->SelectedText;
+			String^ name = comboBox3->SelectedItem->ToString();
 			String^ studentName = gcnew String(student->student->getstudentname().c_str());
 			if (name == studentName)
 			{
 				for each (CourseM ^ course in courses)
 				{
-					String^ name = comboBox2->SelectedText;
+					String^ name = comboBox2->SelectedItem->ToString();
 					String^ courseName = gcnew String(course->course->getCourseName().c_str());
-
 
 					if (name == courseName)
 					{
 						course->course->addStudent(student->student);
-						break;//Student parameter
+						break;
 					}
 				}
 				break;
 			}
 		}
+		MessageBox::Show("Sucessfully Added");
+	}
+	else if (label4->Text == "Remove Student")
+	{
+		String^ name = comboBox3->SelectedItem->ToString();
+		for each (StudentM ^ student in students) {
+			String^ studentName = gcnew String(student->student->getstudentname().c_str());
+			if (name = studentName) {
+				
+				break;
+			}
+		}
+
 	}
 }
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -476,5 +492,19 @@ private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, Sys
 		   }
 		   comboBox->Items->AddRange(studentNames);
 	   }
+	   void AddforComboboxStudentremove(ComboBox^ comboBox, CourseM^ course)
+	   {
+		   array<String^>^ StudentNames = gcnew array<String^>(course->course->enrolledStudents.size());
+		   int index = 0;
+		   for each (Student*  student in course->course->enrolledStudents) {
+			   String^ studentname = gcnew System::String(student->getstudentname().c_str());
+			   StudentNames[index] = studentname;
+			   index++;
+		   }
+	   }
+private: System::Void comboBox3_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

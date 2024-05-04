@@ -47,9 +47,10 @@ bool signup(string username, string password)
 
     //Course class
 
-    void Course::addStudent(Student* student) {
+    /*void Course::addStudent(Student* student) {
         enrolledStudents.push_back(student);
-    }
+    }*/
+
     void Course::removeStudent(Student* student) {
         auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
         if (it != enrolledStudents.end()) {
