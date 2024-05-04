@@ -342,16 +342,16 @@ string Time::getEndTime()
             const auto& courses = teacherCoursePair.second;
 
             
-            timetableData.push_back(" Teacher: " + teacher->getName());
+           // timetableData.push_back(" Teacher: " + teacher->getName());
 
             for(const auto& courseTimeRoomTuple : courses) {
+                timetableData.push_back(teacher->getName());
                 Course* course = get<0>(courseTimeRoomTuple);
                 Time* time = get<1>(courseTimeRoomTuple);
                 Room* room = get<2>(courseTimeRoomTuple);
-                timetableData.push_back(" Course: " + course->getCourseName());
-                timetableData.push_back(" Time: " + time->getStartTime() + " - " + time->getEndTime());
-                timetableData.push_back(" Room: " + room->getRoomNumber());
-                timetableData.push_back("\n");
+                timetableData.push_back(course->getCourseName());
+                timetableData.push_back(time->getStartTime() + " - " + time->getEndTime());
+                timetableData.push_back( room->getRoomNumber());
             }
         }
         return timetableData;
@@ -418,18 +418,16 @@ string Time::getEndTime()
                 vector<tuple<Course*, Time*, Room*>> courses = studentCoursePair.second;
 
                 string studentname = student->getstudentname();
-                timetableStudent.push_back(" Student = "+studentname);
                 for (const auto& courseTimeRoomTuple : courses) {
+                    timetableStudent.push_back(studentname);
                     Course* course = get<0>(courseTimeRoomTuple);
                     Time* time = get<1>(courseTimeRoomTuple);
                     Room* room = get<2>(courseTimeRoomTuple);
-                    timetableStudent.push_back("Course = " + course->getCourseName());
-                    timetableStudent.push_back("Time = " + time->getStartTime() + " - " + time->getEndTime());
-                    timetableStudent.push_back("Room = " + room->getRoomNumber());
+                    timetableStudent.push_back( course->getCourseName());
+                    timetableStudent.push_back(time->getStartTime() + " - " + time->getEndTime());
+                    timetableStudent.push_back(room->getRoomNumber());
                  /*   cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Room: " << room->getRoomNumber() << endl;*/
-                    timetableStudent.push_back("\n");
                 }
-                timetableStudent.push_back("\n");
                /* cout << endl;*/
             }
         }
@@ -473,17 +471,18 @@ string Time::getEndTime()
             // Iterate over sections for the day
             for (const auto& sectionPair : day.second) {
                 string sectionName = sectionPair.first;
-                timetableSection.push_back("Section" + sectionName);
+                //timetableSection.push_back("Section" + sectionName);
                 /*cout << "Section: " << sectionName << endl;*/
 
                 // Iterate over courses for the section
                 for (const auto& courseTimeRoomTuple : sectionPair.second) {
+                    timetableSection.push_back(sectionName);
                     Course* course = get<0>(courseTimeRoomTuple);
                     Time* time = get<1>(courseTimeRoomTuple);
                     Room* room = get<2>(courseTimeRoomTuple);
-                    timetableSection.push_back("Course: " + course->getCourseName());
-                    timetableSection.push_back(" Time: " + time->getStartTime() + " - " + time->getEndTime());
-                    timetableSection.push_back(" Room: " + room->getRoomNumber());
+                    timetableSection.push_back( course->getCourseName());
+                    timetableSection.push_back(time->getStartTime() + " - " + time->getEndTime());
+                    timetableSection.push_back(room->getRoomNumber());
                     /*cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Room: " << room->getRoomNumber() << endl;*/
                 }
                 /*cout << endl;*/
@@ -666,14 +665,15 @@ vector<string> Timetable::roomTimetable() {
             Room* room = roomCoursePair.first;
             vector<tuple<Course*, Time*, Section*>> courses = roomCoursePair.second;
 
-            cout << "Room: " << room->getRoomNumber() << endl;
+            //cout << "Room: " << room->getRoomNumber() << endl;
             for (const auto& courseTimeSectionTuple : courses) {
+                timetableRoom.push_back(room->getRoomNumber());
                 Course* course = get<0>(courseTimeSectionTuple);
                 Time* time = get<1>(courseTimeSectionTuple);
                 Section* section = get<2>(courseTimeSectionTuple);
-                timetableRoom.push_back("Course: " + course->getCourseName());
-                timetableRoom.push_back(" Time : " + time->getStartTime() + " - " + time->getEndTime());
-                timetableRoom.push_back(" Section : " + section->getName());
+                timetableRoom.push_back(course->getCourseName());
+                timetableRoom.push_back(time->getStartTime() + " - " + time->getEndTime());
+                timetableRoom.push_back(section->getName());
 
               //  cout << "Course: " << course->getCourseName() << ", Time: " << time->getStartTime() << " - " << time->getEndTime() << ", Section: " << section->getName() << endl;
             }
@@ -735,10 +735,10 @@ vector<string> Timetable::roomTimetable() {
         Room* room5 = new Room("4-02 Lab", 50);
 
         // Define teachers
-        Teacher* teacher1 = new Teacher("waleed", 201, "Waleed123@gmail.com");
-        Teacher* teacher2 = new Teacher("tamim", 202, "Tamim@gmail.com");
-        Teacher* teacher3 = new Teacher("sadaf", 203, "Sadaf@gmail.com");
-        Teacher* teacher4 = new Teacher("awais", 204, "Awais@gmail.com");
+        Teacher* teacher1 = new Teacher("Waleed", 201, "Waleed123@gmail.com");
+        Teacher* teacher2 = new Teacher("Tamim", 202, "Tamim@gmail.com");
+        Teacher* teacher3 = new Teacher("Sadaf", 203, "Sadaf@gmail.com");
+        Teacher* teacher4 = new Teacher("Awais", 204, "Awais@gmail.com");
 
         // Define time slots
         vector<Time*> times = createTimeSlots();
