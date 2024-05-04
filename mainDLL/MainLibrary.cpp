@@ -51,12 +51,6 @@ bool signup(string username, string password)
         enrolledStudents.push_back(student);
     }*/
 
-    void Course::removeStudent(Student* student) {
-        auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
-        if (it != enrolledStudents.end()) {
-            enrolledStudents.erase(it);
-        }
-    }
 
     void Course::viewStudents() const {
         for (auto student : enrolledStudents) {

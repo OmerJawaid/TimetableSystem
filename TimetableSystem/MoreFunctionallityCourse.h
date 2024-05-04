@@ -407,9 +407,10 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+	CourseM^ course1;
 	if (label4->Text == "Select Course")
 	{
-		/*label4->Text = "Remove Student";
+		label4->Text = "Remove Student";
 			String^ name = comboBox2->SelectedItem->ToString();
 		for each (CourseM ^ course in courses) {
 			String^ courseName = gcnew String(course->course->getCourseName().c_str());
@@ -420,7 +421,8 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 				AddforComboboxStudentremove(comboBox3, course);
 				break;
 			}
-		}*/
+			course1 = course;
+		}
 	}
 	else if (label4->Text == "Add Student")
 	{
@@ -449,14 +451,20 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	else if (label4->Text == "Remove Student")
 	{
 		String^ name = comboBox3->SelectedItem->ToString();
-		for each (StudentM ^ student in students) {
-			String^ studentName = gcnew String(student->student->getstudentname().c_str());
-			if (name = studentName) {
-				
+		for each (Student * student in course1->course->enrolledStudents)
+		{
+			String^ studentname = gcnew String(student->getstudentname().c_str());
+			if (studentname == name)
+			{
+				course1->course->removeStudent(student);
+				MessageBox::Show("Sucessfully Deleted Student");
 				break;
 			}
-		}
 
+			button4->Text = "Select Course";
+			label7->Hide();
+			comboBox3->Visible = false;
+		}
 	}
 }
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {

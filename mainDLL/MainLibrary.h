@@ -43,7 +43,12 @@ public:
     void addStudent(Student* student) {
             enrolledStudents.push_back(student);
     }
-    void removeStudent(Student* student);
+    void removeStudent(Student* student) {
+        auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
+        if (it != enrolledStudents.end()) {
+            enrolledStudents.erase(it);
+        }
+    }
     void viewStudents() const;
 
     std::string getCourseName() const {
