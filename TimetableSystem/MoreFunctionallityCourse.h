@@ -22,6 +22,7 @@ namespace TimetableSystem {
 		{
 			this->students = students;
 			this->courses = courses;
+			
 			InitializeComponent();
 			
 		}
@@ -59,6 +60,7 @@ namespace TimetableSystem {
 
 	private:
 		List<StudentM^>^ students = gcnew List<StudentM^>(); List<CourseM^>^ courses = gcnew List<CourseM^>();
+		CourseM^ course1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
 
@@ -406,8 +408,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+	  
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-	CourseM^ course1;
+	
 	if (label4->Text == "Select Course")
 	{
 		label4->Text = "Remove Student";
@@ -419,9 +422,10 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 				label7->Show();
 				comboBox3->Visible = true;
 				AddforComboboxStudentremove(comboBox3, course);
+				course1 = course;
 				break;
 			}
-			course1 = course;
+			
 		}
 	}
 	else if (label4->Text == "Add Student")
@@ -460,11 +464,10 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 				MessageBox::Show("Sucessfully Deleted Student");
 				break;
 			}
-
-			button4->Text = "Select Course";
-			label7->Hide();
-			comboBox3->Visible = false;
 		}
+		button4->Text = "Select Course";
+		label7->Hide();
+		comboBox3->Visible = false;
 	}
 }
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
