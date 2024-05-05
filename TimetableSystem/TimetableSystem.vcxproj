@@ -78,6 +78,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\omerj\Downloads\json-develop;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -123,6 +124,8 @@
     <ClCompile Include="Add.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
+    <ClCompile Include="MoreFunctionalityStudent.cpp" />
+    <ClCompile Include="MoreFunctionallityCourse.cpp" />
     <ClCompile Include="Signup1.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
@@ -134,6 +137,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MangedClass.h" />
+    <ClInclude Include="MoreFunctionalityStudent.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MoreFunctionallityCourse.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MyForm1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -158,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreFunctionalityStudent.resx">
+      <DependentUpon>MoreFunctionalityStudent.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MoreFunctionallityCourse.resx">
+      <DependentUpon>MoreFunctionallityCourse.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm1.resx">
       <DependentUpon>MyForm1.h</DependentUpon>

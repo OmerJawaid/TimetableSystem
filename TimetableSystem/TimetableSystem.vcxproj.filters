@@ -30,6 +30,12 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoreFunctionallityCourse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoreFunctionalityStudent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="singup.h">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="MangedClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoreFunctionallityCourse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoreFunctionalityStudent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

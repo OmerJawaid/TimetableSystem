@@ -31,14 +31,29 @@ class Course {      //Managed class having errors after including public ref cla
 
 public:
     std::vector<Student*> enrolledStudents;
-    Course(int courseCode, const std::string& courseName, Teacher* teacher, Room* assignedRoom)
-        : courseCode(courseCode), courseName(courseName), teacher(teacher), assignedRoom(assignedRoom), assignedSection(nullptr), assignedTime(nullptr) {}
 
-    void addStudent(Student* student);
-    void removeStudent(Student* student);
+    Course(int courseCode, const std::string& coursename)
+    {
+        courseCode = courseCode;
+        courseName = coursename;
+        assignedSection = nullptr;
+        assignedTime = nullptr;
+    };
+
+    void addStudent(Student* student) {
+            enrolledStudents.push_back(student);
+    }
+    void removeStudent(Student* student) {
+        auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
+        if (it != enrolledStudents.end()) {
+            enrolledStudents.erase(it);
+        }
+    }
     void viewStudents() const;
 
-    std::string getCourseName() const;
+    std::string getCourseName() const {
+        return courseName;
+    }
     int getCourseCode() const;
     Teacher* getTeacher() const;
     Room* getAssignedRoom() const;

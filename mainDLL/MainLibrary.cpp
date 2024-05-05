@@ -46,15 +46,11 @@ bool signup(string username, string password)
 
 
     //Course class
-    void Course::addStudent(Student* student) {
+
+    /*void Course::addStudent(Student* student) {
         enrolledStudents.push_back(student);
-    }
-    void Course::removeStudent(Student* student) {
-        auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
-        if (it != enrolledStudents.end()) {
-            enrolledStudents.erase(it);
-        }
-    }
+    }*/
+
 
     void Course::viewStudents() const {
         for (auto student : enrolledStudents) {
@@ -62,9 +58,9 @@ bool signup(string username, string password)
         }
     }
 
-    std::string Course::getCourseName() const {
-        return courseName;
-    }
+    //std::string Course::getCourseName() const {
+    //    return courseName;
+    //}
 
     int Course::getCourseCode() const {
         return courseCode;
@@ -191,9 +187,10 @@ string Time::getEndTime()
         coursesEnrolled.push_back(course);
     }
     void Student::dropCourse(Course* course) {
-        for (auto cor = coursesEnrolled.begin(); cor != coursesEnrolled.end(); cor++)
-            if (*cor == course)
-                coursesEnrolled.erase(cor);
+        auto it = find(coursesEnrolled.begin(), coursesEnrolled.end(), course);
+        if (it != coursesEnrolled.end()) {
+            coursesEnrolled.erase(it);
+        }
     }
     void Student::viewCourses(Course* course) {
         /*cout << "Courses Enrolled: ";*/
