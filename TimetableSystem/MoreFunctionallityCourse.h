@@ -9,7 +9,6 @@ namespace TimetableSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace TimetableSystem;
 
 	/// <summary>
 	/// Summary for MoreFunctionallityCourse
@@ -376,6 +375,7 @@ namespace TimetableSystem {
 			this->Controls->Add(this->listBox5);
 			this->Name = L"MoreFunctionallityCourse";
 			this->Text = L"MoreFunctionallityCourse";
+			this->Load += gcnew System::EventHandler(this, &MoreFunctionallityCourse::MoreFunctionallityCourse_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -466,6 +466,7 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 			}
 		}
 		button4->Text = "Select Course";
+		label4->Text = "Select Course";
 		label7->Hide();
 		comboBox3->Visible = false;
 	}
@@ -516,6 +517,8 @@ private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, Sys
 private: System::Void comboBox3_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void MoreFunctionallityCourse_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

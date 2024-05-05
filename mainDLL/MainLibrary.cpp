@@ -185,9 +185,10 @@ string Time::getEndTime()
         coursesEnrolled.push_back(course);
     }
     void Student::dropCourse(Course* course) {
-        for (auto cor = coursesEnrolled.begin(); cor != coursesEnrolled.end(); cor++)
-            if (*cor == course)
-                coursesEnrolled.erase(cor);
+        auto it = find(coursesEnrolled.begin(), coursesEnrolled.end(), course);
+        if (it != coursesEnrolled.end()) {
+            coursesEnrolled.erase(it);
+        }
     }
     void Student::viewCourses(Course* course) {
         /*cout << "Courses Enrolled: ";*/

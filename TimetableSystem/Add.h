@@ -811,32 +811,28 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text=="Student")
 	{
-		/*this->Hide();
-		MoreFunctionalityStudent StudentFunc;
-		StudentFunc.ShowDialog();*/
-		outputfilehandling();
+		this->Hide();
+		MoreFunctionalityStudent^ StudentFunc=gcnew MoreFunctionalityStudent(students,courses);
+		StudentFunc->ShowDialog();
+		/*outputfilehandling();*/
 	}
 }
 	   void outputfilehandling()
 	   {
 
-		   // Convert System::String^ to const char*
 		   String^ fileName = "Student.txt";
 
 		   try
 		   {
-			   // Write data to the file
 			   StreamWriter^ sw = gcnew StreamWriter(fileName,std::ios::out|std::ios::trunc);
 			   sw->WriteLine("Hello, world!");
 			   sw->WriteLine("This is a test file.");
 			   sw->Close();
 
-			   // Show a message box indicating success
 			   MessageBox::Show("File 'Student.txt' written successfully.");
 		   }
 		   catch (Exception^ e)
 		   {
-			   // Show a message box indicating failure
 			   MessageBox::Show("Error: Unable to write to file 'Student.txt'.");
 		   }
 	   }
