@@ -62,6 +62,7 @@ namespace TimetableSystem {
 		CourseM^ course1;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::ComboBox^ comboBox2;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
 
 		   /// <summary>
 		/// Required designer variable.
@@ -94,6 +95,8 @@ namespace TimetableSystem {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// listBox1
@@ -230,6 +233,7 @@ namespace TimetableSystem {
 			this->listBox5->Name = L"listBox5";
 			this->listBox5->Size = System::Drawing::Size(552, 225);
 			this->listBox5->TabIndex = 26;
+			this->listBox5->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::listBox5_SelectedIndexChanged);
 			// 
 			// comboBox3
 			// 
@@ -239,7 +243,6 @@ namespace TimetableSystem {
 			this->comboBox3->Size = System::Drawing::Size(209, 21);
 			this->comboBox3->TabIndex = 30;
 			this->comboBox3->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::comboBox3_SelectedIndexChanged);
-			AddforComboboxStudent(comboBox3);
 			// 
 			// label7
 			// 
@@ -338,6 +341,7 @@ namespace TimetableSystem {
 			this->label5->Size = System::Drawing::Size(64, 16);
 			this->label5->TabIndex = 38;
 			this->label5->Text = L"Courses";
+			this->label5->Click += gcnew System::EventHandler(this, &MoreFunctionallityCourse::label5_Click);
 			// 
 			// comboBox2
 			// 
@@ -347,7 +351,15 @@ namespace TimetableSystem {
 			this->comboBox2->Size = System::Drawing::Size(209, 21);
 			this->comboBox2->TabIndex = 39;
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionallityCourse::comboBox2_SelectedIndexChanged);
-			AddforComboboxCourse(comboBox2);
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Location = System::Drawing::Point(229, 197);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(447, 171);
+			this->dataGridView1->TabIndex = 40;
+			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MoreFunctionallityCourse::dataGridView1_CellContentClick);
 			// 
 			// MoreFunctionallityCourse
 			// 
@@ -373,9 +385,11 @@ namespace TimetableSystem {
 			this->Controls->Add(this->listBox1);
 			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->listBox5);
+			this->Controls->Add(this->dataGridView1);
 			this->Name = L"MoreFunctionallityCourse";
 			this->Text = L"MoreFunctionallityCourse";
 			this->Load += gcnew System::EventHandler(this, &MoreFunctionallityCourse::MoreFunctionallityCourse_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -404,7 +418,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox3->Visible = false;
 	label7->Visible = false;
 	button4->Text = "View";
-	label4->Text = "View Students";
+	label4->Text = "View";
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -470,6 +484,16 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		label7->Hide();
 		comboBox3->Visible = false;
 	}
+	else if (label4->Text == "View")
+	{
+		comboBox2->Hide();
+		label5->Hide();
+		listBox5->Hide();
+		dataGridView1->Visible = true;
+		this->dataGridView1->Columns->Clear(); // Clear existing columns
+		this->dataGridView1->Columns->Add("Name", "Name");
+		this->dataGridView1->Columns->Add("Enrollment", "Enrollment");
+	}
 }
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e) {
 	/*this->Hide();*/
@@ -519,6 +543,13 @@ private: System::Void comboBox3_SelectedIndexChanged(System::Object^ sender, Sys
 private: System::Void listView1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void MoreFunctionallityCourse_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	this->Hide();
+}
+private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
