@@ -9,9 +9,8 @@ public ref class CourseM {
 	
 public:
 	Course* course;
-	CourseM(int courseCode, const std::string& coursename , Teacher* teacher, Room* assignedRoom){
-
-		course = new Course(courseCode,coursename, teacher, assignedRoom);
+	CourseM(int courseCode, const std::string& coursename) {
+		course = new Course(courseCode,coursename);
 	}
 };
 public ref class TimetableM {
@@ -38,8 +37,8 @@ public:
 public ref class StudentM {
 public:
 	Student* student;
-	StudentM(int ID, std::string na, std::string mail, std::string Section) {
-		student = new Student(ID,na,mail,Section);
+	StudentM(int ID, std::string na, std::string mail) {
+		student = new Student(ID,na,mail);
 	}
 };
 

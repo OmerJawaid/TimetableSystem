@@ -619,6 +619,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		try {
 			int enrollment = Convert::ToInt32(textBox2->Text);
 
+
 			IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 			std::string studentname(static_cast<const char*>(ptr.ToPointer()));
 			Marshal::FreeHGlobal(ptr);
@@ -692,9 +693,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 		Marshal::FreeHGlobal(ptr);
 		try {
 			int coursecode = Convert::ToInt32(textBox2->Text);
-			Teacher* teacher = teachers[courseiterator]->teacher;
-             Room* room = rooms[courseiterator]->room;
-			CourseM^ course1 = gcnew CourseM(coursecode, name,teacher,room);
+			CourseM^ course1 = gcnew CourseM(coursecode, name);
 			courses->Add(course1);
 			try {
 				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
