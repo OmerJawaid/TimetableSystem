@@ -9,6 +9,7 @@ namespace TimetableSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Data::SqlClient;
 
 	/// <summary>
 	/// Summary for Signup
@@ -244,6 +245,24 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	flag=signup(username, password);
 	if (textBox1->Text != "" && textBox2->Text != "" && textBox3->Text != "")
 	{
+		try
+		{
+			SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+			con->Open();
+
+			SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Amaan (username, password) VALUES (@username, @password)", con);
+			cmd->Parameters->AddWithValue("@username", textBox2->Text);
+			cmd->Parameters->AddWithValue("@password", textBox3->Text);
+			
+			cmd->ExecuteNonQuery();
+
+			con->Close();
+		}
+		catch (Exception^ ex)
+		{
+			MessageBox::Show("An error occurred: " + ex->Message);
+		}
+
 		if (flag)
 		{
 			MessageBox::Show("Signup Successful");

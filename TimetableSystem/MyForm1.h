@@ -12,20 +12,25 @@ namespace TimetableSystem {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
+	using namespace System::Data::SqlClient;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for MyForm1
 	/// </summary>
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
+		static int userID = 0;
 	public:
 		MyForm1(void)
 		{
+
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+			
 		}
 
 	protected:
@@ -243,23 +248,53 @@ private: System::Void textBox2_TextChanged(System::Object^ sender, System::Event
 private: System::Void textBox3_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	bool flag=false;
 	std::string username = msclr::interop::marshal_as<std::string>(textBox2->Text);
 	std::string password = msclr::interop::marshal_as<std::string>(textBox3->Text);
-	flag=login(username, password);
 
-	if (textBox2->Text != "" && textBox3->Text != "")
+	if (username != "" && password != "")
 	{
-		if (flag == true) {
-			MessageBox::Show("Login Successful");
-			textBox2->Text = "";
-			textBox3->Text = "";
-			this->Hide();
-			Dashboard^ f1 = gcnew Dashboard(this);
-			f1->ShowDialog();
+		try {
+			SqlConnection^ connection = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+			connection->Open();
+			SqlCommand^ cmd = gcnew SqlCommand("SELECT [username], [password] FROM [Login data]", connection);
+			SqlDataReader^ reader = cmd->ExecuteReader();
+			bool flag = false;
+
+			while (reader->Read())
+			{
+				String^ usernamedb = reader["username"]->ToString();
+				String^ passworddb = reader["password"]->ToString();
+				std::string usernamedbst = marshal_as<std::string>(usernamedb);
+				std::string passworddbst = marshal_as<std::string>(passworddb);
+
+				flag = login(username, password, usernamedbst, passworddbst);
+				if (flag)
+				{
+					break;
+				}
+			}
+
+			reader->Close();
+			connection->Close();
+
+			if (flag)
+			{
+				MessageBox::Show("Login Successful");
+				textBox2->Text = "";
+				textBox3->Text = "";
+				this->Hide();
+				Dashboard^ f1 = gcnew Dashboard(this);
+				f1->ShowDialog();
+			}
+			else
+			{
+				MessageBox::Show("Login Failed");
+			}
 		}
-		else
-			MessageBox::Show("Username or Password is Incorrect. Try Again!");
+		catch (Exception^ ex)
+		{
+			MessageBox::Show(ex->Message);
+		}
 	}
 	else
 	{

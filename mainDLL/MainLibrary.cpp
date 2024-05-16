@@ -11,22 +11,10 @@ vector<string>Test()
     str.push_back("World");
     return str;
 }
-bool login(string username, string password)
+bool login(string username, string password,string usernamedb,string passworddb)
 {
-    ifstream infile("users.txt");
-    string user, pass;
-    bool found = false;
-    
-    if (infile.is_open()) {
-       while (infile >> user >> pass&&found==false) {
-            if (user == username && pass == password)
-                found=true;
-            else
-                found=false;
-        }
-        infile.close();
-        return found;
-    }
+    if (usernamedb == username && passworddb == password)
+        return true;
     else
         return false;
 }
