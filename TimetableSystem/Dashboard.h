@@ -1,5 +1,4 @@
 #pragma once
-#include <Windows.h>
 #include <vcclr.h>
 #include"Add.h"
 #include"View.h"
@@ -19,15 +18,18 @@ namespace TimetableSystem {
 	{
 	public:
 		Form^ obj;
-		Dashboard(void)
+		String^ profilename;
+		Dashboard()
 		{
+			
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
 		}
-		Dashboard(Form ^obj1)
+		Dashboard(Form ^obj1, String^ profilenamepara)
 		{
+			profilename = profilenamepara;
 			obj = obj1;
 			InitializeComponent();
 			//
@@ -240,6 +242,8 @@ namespace TimetableSystem {
 			this->button5->Text = L"Person Name and username for profile";
 			this->button5->TextAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &Dashboard::button5_Click);
+			this->button5->Text = profilename;
 			// 
 			// button6
 			// 
@@ -306,6 +310,8 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	obj->Show();
 }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

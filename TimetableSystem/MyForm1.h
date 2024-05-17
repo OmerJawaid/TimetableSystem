@@ -21,7 +21,7 @@ namespace TimetableSystem {
 	/// </summary>
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
-		static int userID = 0;
+		String^ profilename;
 	public:
 		MyForm1(void)
 		{
@@ -283,7 +283,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 				textBox2->Text = "";
 				textBox3->Text = "";
 				this->Hide();
-				Dashboard^ f1 = gcnew Dashboard(this);
+				Dashboard^ f1 = gcnew Dashboard(this,Name);
 				f1->ShowDialog();
 			}
 			else

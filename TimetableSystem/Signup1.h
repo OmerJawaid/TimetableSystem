@@ -17,7 +17,7 @@ namespace TimetableSystem {
 	public ref class Signup : public System::Windows::Forms::Form
 	{
 	public:
-		Form ^obj;
+		Form^ obj;
 		Signup(void)
 		{
 			InitializeComponent();
@@ -47,15 +47,6 @@ namespace TimetableSystem {
 		}
 	private: System::Windows::Forms::Label^ label4;
 	protected:
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label2;
