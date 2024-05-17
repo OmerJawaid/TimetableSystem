@@ -185,9 +185,6 @@ public:
     };
 
 
-
-extern "C" MainLibrary_API bool signup(std::string username, std::string password);
-
 extern "C" MainLibrary_API bool login(std::string username, std::string password, std::string usernamedb, std::string passworddb);
 
 extern "C" MainLibrary_API std::vector<std::string>Test();

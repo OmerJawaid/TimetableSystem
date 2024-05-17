@@ -256,7 +256,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		try {
 			SqlConnection^ connection = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
 			connection->Open();
-			SqlCommand^ cmd = gcnew SqlCommand("SELECT [username], [password] FROM [Login data]", connection);
+			SqlCommand^ cmd = gcnew SqlCommand("SELECT [username], [password] FROM [Profile]", connection);
 			SqlDataReader^ reader = cmd->ExecuteReader();
 			bool flag = false;
 

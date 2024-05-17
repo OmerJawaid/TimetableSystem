@@ -19,19 +19,6 @@ bool login(string username, string password,string usernamedb,string passworddb)
         return false;
 }
 
-bool signup(string username, string password)
-{
-	ofstream outfile("users.txt", ios::app);
-	if (outfile.is_open()) {
-		outfile << username << " " << password << endl;
-		outfile.close();
-        return true;
-	}
-	else {
-        return false;
-	}
-}
-
 
     //Course class
 
