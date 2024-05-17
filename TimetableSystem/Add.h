@@ -17,6 +17,7 @@ namespace TimetableSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Data::SqlClient;
 	using namespace System::Collections::Generic;
 	using namespace Runtime::InteropServices;
 	using namespace System::IO;
@@ -614,11 +615,14 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	button8->Visible = false;
 }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	
+	SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+	con->Open();
+	
 	if (label3->Text == "Student")
 	{
 		try {
 			int enrollment = Convert::ToInt32(textBox2->Text);
-
 
 			IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 			std::string studentname(static_cast<const char*>(ptr.ToPointer()));
@@ -634,9 +638,16 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 
 				try {
 					student->student->AssignSection(sections[studentiterator]->section);
+					String^ SectionName =gcnew String(sections[studentiterator]->section->getName().c_str());
+					SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Student(StudentName, StudentEmail, StudentEnrollment, SectionName) VALUES (@StudentName, @StudentEmail, @StudentEnrollment, @SectionName)", con);
+					cmd->Parameters->AddWithValue("@StudentEnrollment",enrollment);
+					cmd->Parameters->AddWithValue("@StudentName", textBox1->Text);
+					cmd->Parameters->AddWithValue("@StudentEmail",textBox3->Text);
+					cmd->Parameters->AddWithValue("@SectionName",SectionName);
+					cmd->ExecuteNonQuery();
 				}
 				catch (Exception^ e) {
-					MessageBox::Show("Section not selected");
+					MessageBox::Show(e->Message/*"Section not selected"*/);
 				}
 			}
 			else {
@@ -671,6 +682,11 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 					Marshal::FreeHGlobal(ptr);
 					TeacherM^ teacher = gcnew TeacherM(teachername, ID, teacheremail);
 					teachers->Add(teacher);
+					SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Teacher(TeacherName, TeacherEmail, TeacherID) VALUES (@TeacherName, @TeacherEmail, @TeacherID)",con);
+					cmd->Parameters->AddWithValue("@TeacherName", textBox1->Text);
+					cmd->Parameters->AddWithValue("@TeacherEmail", textBox3->Text);
+					cmd->Parameters->AddWithValue("@TeacherID", ID);
+					cmd->ExecuteNonQuery();
 				}
 				else
 					MessageBox::Show("Email is empty");
@@ -698,7 +714,16 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			try {
 				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
 				course1->course->setAssignedRoom(rooms[courseiterator]->room);
+				String^ TeacherName = gcnew String(teachers[courseiterator]->teacher->getName().c_str());
+				String^ RoomNumber = gcnew String(rooms[courseiterator]->room->getRoomNumber().c_str());
 				courseiterator++;
+
+				SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Course(Coursename, Coursecode, TeacherID, RoomNum) VALUES(@Coursename, @Coursecode, @TeacherID, @RoomNum)",con);
+				cmd->Parameters->AddWithValue("@Coursename", textBox1->Text);
+				cmd->Parameters->AddWithValue("@Coursecode", coursecode);
+				cmd->Parameters->AddWithValue("@TeacherID", TeacherName );
+				cmd->Parameters->AddWithValue("@RoomNum", RoomNumber);
+				cmd->ExecuteNonQuery();
 			}
 			catch (System::Exception^ e) {
 				MessageBox::Show("Teacher or Room not assigned to course");
@@ -715,17 +740,26 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Section")
 	{
-		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
-		std::string Sectionname(static_cast<const char*>(ptr.ToPointer()));
-		Marshal::FreeHGlobal(ptr);
-		SectionM^ section = gcnew SectionM(Sectionname);
-		sections->Add(section);
-		ADDforComboboxStudent(comboBox1);
-		textBox1->Text = "";
-		textBox2->Text = "";
-		textBox3->Text = "";
+		try {
+			IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
+			std::string Sectionname(static_cast<const char*>(ptr.ToPointer()));
+			Marshal::FreeHGlobal(ptr);
+			SectionM^ section = gcnew SectionM(Sectionname);
+			sections->Add(section);
+			ADDforComboboxStudent(comboBox1);
+			SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO SECTION(SectionName) VALUES (@SectionName)", con);
+			cmd->Parameters->AddWithValue("@SectionName", textBox1->Text);
+			cmd->ExecuteNonQuery();
+			textBox1->Text = "";
+			textBox2->Text = "";
+			textBox3->Text = "";
+		}
+		catch (Exception^ e)
+		{
+			MessageBox::Show(e->Message);
+		}
 	}
-else if (label3->Text == "Room")
+	else if (label3->Text == "Room")
 	{
 		try {
 			if (textBox1->Text != "")
@@ -737,18 +771,23 @@ else if (label3->Text == "Room")
 				int capacity = Convert::ToInt64(textBox2->Text);
 				RoomM^ room = gcnew RoomM(Roomnumber, capacity);
 				rooms->Add(room);
+				SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Room(RoomNum, RoomCapacity) VALUES(@RoomNum, @RoomCapacity)",con);
+				cmd->Parameters->AddWithValue("@RoomNum", textBox1->Text);
+				cmd->Parameters->AddWithValue("@RoomCapacity", capacity);
+				cmd->ExecuteNonQuery();
 			}
 			else
 				MessageBox::Show("Roomnumber is empty");
 		}
 		catch (Exception^ e)
 		{
-			MessageBox::Show("Capacity is empty");
+			MessageBox::Show(e->Message);
 		}
 		textBox1->Text = "";
 		textBox2->Text = "";
 		textBox3->Text = "";
 	}
+	con->Close();
 }
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -837,6 +876,4 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 		   }
 	   }
 };
-
 }
-
