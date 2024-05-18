@@ -726,7 +726,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 				cmd->ExecuteNonQuery();
 			}
 			catch (System::Exception^ e) {
-				MessageBox::Show("Teacher or Room not assigned to course");
+				MessageBox::Show(e->Message);
 			}
 		}
 		catch (System::Exception^ e)

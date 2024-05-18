@@ -36,6 +36,9 @@
     <ClCompile Include="MoreFunctionalityStudent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DAL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="singup.h">

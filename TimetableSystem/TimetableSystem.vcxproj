@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Add.cpp" />
+    <ClCompile Include="DAL.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MoreFunctionalityStudent.cpp" />

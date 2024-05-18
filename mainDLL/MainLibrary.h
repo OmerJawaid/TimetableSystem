@@ -154,6 +154,9 @@ public:
     void removeCourse(Course* course);
     void viewCourse(Course* course);
     std::string getName();
+    int getteacherid() {
+        return teacherID;
+    }
 };
 
 class MainLibrary_API Time {
