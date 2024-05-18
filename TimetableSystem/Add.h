@@ -3,6 +3,7 @@
 #include"MangedCLass.h"
 #include"MoreFunctionallityCourse.h"
 #include"MoreFunctionalityStudent.h"
+#include"DAL.h"
 #include<string>
 #include<fstream>
 
@@ -51,7 +52,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/	
-		
+			
 		}
 		Add(Form ^obj1)
 		{
@@ -524,7 +525,7 @@ namespace TimetableSystem {
 			this->Load += gcnew System::EventHandler(this, &Add::Add_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
+			getdata();
 		}
 #pragma endregion
 	private: System::Void Add_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -614,6 +615,15 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	button6->Text= "Create Room";
 	button8->Visible = false;
 }
+	   void getdata() {
+		   DAL^ dataaccesslayer = gcnew DAL(courses, teachers, rooms, students, sections);
+		   dataaccesslayer->DataRetriver();
+		   courses = dataaccesslayer->courses;
+		   teachers = dataaccesslayer->teachers;
+		   rooms = dataaccesslayer->rooms;
+		   students = dataaccesslayer->students;
+		   sections = dataaccesslayer->sections;
+	   }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 	SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
@@ -714,14 +724,15 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			try {
 				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
 				course1->course->setAssignedRoom(rooms[courseiterator]->room);
-				String^ TeacherName = gcnew String(teachers[courseiterator]->teacher->getName().c_str());
+				
+				int teacherid = teachers[courseiterator]->teacher->getteacherid();
 				String^ RoomNumber = gcnew String(rooms[courseiterator]->room->getRoomNumber().c_str());
 				courseiterator++;
 
 				SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Course(Coursename, Coursecode, TeacherID, RoomNum) VALUES(@Coursename, @Coursecode, @TeacherID, @RoomNum)",con);
 				cmd->Parameters->AddWithValue("@Coursename", textBox1->Text);
 				cmd->Parameters->AddWithValue("@Coursecode", coursecode);
-				cmd->Parameters->AddWithValue("@TeacherID", TeacherName );
+				cmd->Parameters->AddWithValue("@TeacherID", teacherid);
 				cmd->Parameters->AddWithValue("@RoomNum", RoomNumber);
 				cmd->ExecuteNonQuery();
 			}

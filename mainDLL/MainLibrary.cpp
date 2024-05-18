@@ -217,7 +217,10 @@ string Time::getEndTime()
     {
             return name;
     }
-
+    int Teacher::getteacherid()
+    {
+        return teacherID;
+    }
     //Section Class
     
 

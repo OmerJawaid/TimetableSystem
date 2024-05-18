@@ -128,7 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Add.cpp" />
-    <ClCompile Include="DAL.cpp" />
     <ClCompile Include="Dashboard.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MoreFunctionalityStudent.cpp" />
@@ -140,6 +139,7 @@
     <ClInclude Include="Add.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="DAL.h" />
     <ClInclude Include="Dashboard.h">
       <FileType>CppForm</FileType>
     </ClInclude>

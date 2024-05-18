@@ -19,6 +19,18 @@ private:
 		return result;
 	}
 public:
+	DAL(List<CourseM^>^ coursesp,
+		List<TeacherM^>^ teachersp,
+		List<RoomM^>^ roomsp,
+		List<StudentM^>^ studentsp,
+		List<SectionM^>^ sectionsp)
+	{
+		courses = coursesp;
+		teachers = teachersp;
+		rooms = roomsp;
+		students = studentsp;
+		sections = sectionsp;
+	}
 	List<CourseM^>^ courses = gcnew List<CourseM^>();
 	List<TeacherM^>^ teachers = gcnew List<TeacherM^>();
 	List<RoomM^>^ rooms = gcnew List<RoomM^>();
@@ -29,7 +41,7 @@ public:
 	{
 		SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
 		con->Open();
-		
+
 		{
 			SqlCommand^ cmdteacher = gcnew SqlCommand("SELECT [TeacherName],[TeacherEmail],[TeacherID] FROM [Teacher]", con);
 			SqlDataReader^ readerteacher = cmdteacher->ExecuteReader();
@@ -42,6 +54,9 @@ public:
 				teachers->Add(teacher);
 			}
 		}
+		con->Close();
+
+		con->Open();
 
 		{
 			SqlCommand^ cmdroom = gcnew SqlCommand("SELECT [RoomNum], [RoomCapacity] FROM [Room]", con);
@@ -54,7 +69,8 @@ public:
 				rooms->Add(room);
 			}
 		}
-
+		con->Close();
+		con->Open();
 		{
 			SqlCommand^ cmdsection = gcnew SqlCommand("SELECT [SectionName] FROM [Section]", con);
 			SqlDataReader^ readersection = cmdsection->ExecuteReader();
@@ -65,7 +81,8 @@ public:
 				sections->Add(section);
 			}
 		}
-
+		con->Close();
+		con->Open();
 		{
 			SqlCommand^ cmdcourse = gcnew SqlCommand("SELECT [Coursename], [Coursecode],[TeacherID],[RoomNum] FROM [Course]", con);
 			SqlDataReader^ readercourse = cmdcourse->ExecuteReader();
@@ -97,7 +114,8 @@ public:
 				}
 			}
 		}
-
+		con->Close();
+		con->Open();
 		{
 			SqlCommand^ cmdstudent = gcnew SqlCommand("SELECT [StudentName], [StudentEmail],[StudentEnrollment],[SectionName] FROM [Student]", con);
 			SqlDataReader^ readerstudent = cmdstudent->ExecuteReader();
@@ -109,7 +127,7 @@ public:
 				std::string studentemail = ConvertToString(readerstudent["StudentEmail"]->ToString());
 				std::string sectionname = ConvertToString(readerstudent["SectionName"]->ToString());
 
-				StudentM^ student = gcnew StudentM(studentenrollment,studentname,studentemail);
+				StudentM^ student = gcnew StudentM(studentenrollment, studentname, studentemail);
 				students->Add(student);
 
 				for each (auto sectionstudent in sections)
@@ -122,6 +140,6 @@ public:
 				}
 			}
 		}
-
+		con->Close();
 	}
 };
