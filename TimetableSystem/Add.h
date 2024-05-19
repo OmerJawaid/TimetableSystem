@@ -52,7 +52,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/	
-			
+			ADDforComboboxStudent(comboBox1);
 		}
 		Add(Form ^obj1)
 		{
@@ -526,6 +526,7 @@ namespace TimetableSystem {
 			this->ResumeLayout(false);
 			this->PerformLayout();
 			getdata();
+			
 		}
 #pragma endregion
 	private: System::Void Add_Load(System::Object^ sender, System::EventArgs^ e) {
@@ -570,6 +571,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	button8->Visible = true;
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	ADDforComboboxStudent(comboBox1);
 	label3->Text = "Student";
 	label5->Text = "Enrollment";
 	label6->Text = "Email";
@@ -757,7 +759,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 			Marshal::FreeHGlobal(ptr);
 			SectionM^ section = gcnew SectionM(Sectionname);
 			sections->Add(section);
-			ADDforComboboxStudent(comboBox1);
+			
 			SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO SECTION(SectionName) VALUES (@SectionName)", con);
 			cmd->Parameters->AddWithValue("@SectionName", textBox1->Text);
 			cmd->ExecuteNonQuery();
@@ -813,6 +815,7 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 }
 	   void ADDforComboboxStudent(ComboBox^ comboBox)
 	   {
+		   comboBox->Items->Clear();
 		   array<String^>^ sectionNames = gcnew array<String^>(sections->Count);
 		   int index = 0;
 		   for each (SectionM ^ section in sections)
@@ -826,6 +829,7 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 	   }
 	   void AddforComboboxTeacher(ComboBox^ comboBox)
 	   {
+		   comboBox->Items->Clear();
 		   array<String^>^ teacherNames = gcnew array<String^>(teachers->Count);
 		   int index = 0;
 		   for each (TeacherM ^ teacher in teachers)
@@ -838,6 +842,7 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 	   }
 	   void AddforComboboxRoom(ComboBox^ comboBox)
 	   {
+		   comboBox->Items->Clear();
 		   array<String^>^ RoomNames = gcnew array<String^>(rooms->Count);
 		   int index = 0;
 		   for each (RoomM ^ room in rooms)
@@ -864,27 +869,7 @@ private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e
 		this->Hide();
 		MoreFunctionalityStudent^ StudentFunc=gcnew MoreFunctionalityStudent(students,courses);
 		StudentFunc->ShowDialog();
-		/*outputfilehandling();*/
 	}
 }
-	   void outputfilehandling()
-	   {
-
-		   String^ fileName = "Student.txt";
-
-		   try
-		   {
-			   StreamWriter^ sw = gcnew StreamWriter(fileName,std::ios::out|std::ios::trunc);
-			   sw->WriteLine("Hello, world!");
-			   sw->WriteLine("This is a test file.");
-			   sw->Close();
-
-			   MessageBox::Show("File 'Student.txt' written successfully.");
-		   }
-		   catch (Exception^ e)
-		   {
-			   MessageBox::Show("Error: Unable to write to file 'Student.txt'.");
-		   }
-	   }
 };
 }
