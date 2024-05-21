@@ -1,5 +1,6 @@
 #pragma once
 #include"MangedClass.h"
+
 using namespace System;
 using namespace System::Data;
 using namespace System::Data::SqlClient;
@@ -39,7 +40,7 @@ public:
 
 	void DataRetriver()
 	{
-		SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+		SqlConnection^ con = gcnew SqlConnection("Data Source=DESKTOP-E19L0RG\\SQL;Initial Catalog=\"Timetable System\";Integrated Security=True");
 		con->Open();
 
 		{
@@ -143,3 +144,5 @@ public:
 		con->Close();
 	}
 };
+
+

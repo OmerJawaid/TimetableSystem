@@ -14,6 +14,8 @@ namespace TimetableSystem {
 	using namespace System::Drawing;
 	using namespace Runtime::InteropServices;
 	using namespace System::Collections::Generic;
+	using namespace System::Data::SqlClient;
+
 
 
 	extern"C" {
@@ -71,25 +73,6 @@ namespace TimetableSystem {
 
 
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	protected:
@@ -307,76 +290,109 @@ namespace TimetableSystem {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 
-		TimetableM^ timetable = gcnew TimetableM();
-		std::vector<std::string> teacherVector = timetable->timetable->teacherTimetable();
+		//TimetableM^ timetable = gcnew TimetableM();
+		//std::vector<std::string> teacherVector = timetable->timetable->teacherTimetable();
 
-		// Create a List to store System::String^
-		System::Collections::Generic::List<System::String^>^ teacherList = gcnew System::Collections::Generic::List<System::String^>();
+		//// Create a List to store System::String^
+		//System::Collections::Generic::List<System::String^>^ teacherList = gcnew System::Collections::Generic::List<System::String^>();
 
-		// Convert each std::string to System::String^ and add to the list
-		for (const std::string& teacher : teacherVector) {
-			System::String^ teacherString = gcnew System::String(teacher.c_str());
-			teacherList->Add(teacherString);
-		}
-		System::String^ teacherString = String::Join(", ", teacherList);
+		//// Convert each std::string to System::String^ and add to the list
+		//for (const std::string& teacher : teacherVector) {
+		//	System::String^ teacherString = gcnew System::String(teacher.c_str());
+		//	teacherList->Add(teacherString);
+		//}
+		//System::String^ teacherString = String::Join(", ", teacherList);
 
-		this->dataGridView1->Columns->Clear(); // Clear existing columns
-		this->dataGridView1->Columns->Add("Teacher", "Teacher");
-		this->dataGridView1->Columns->Add("CourseName", "Course Name");
-		this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Clear(); // Clear existing columns
+		//this->dataGridView1->Columns->Add("Teacher", "Teacher");
+		//this->dataGridView1->Columns->Add("CourseName", "Course Name");
 		//this->dataGridView1->Columns->Add("Time", "Time");
-		this->dataGridView1->Columns->Add("Room", "Room");
+		////this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Add("Room", "Room");
 
-		array<System::String^>^ teacherArray = teacherString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
-		int count = 0;
-		for (int i = 0; i < 2; i++) {
-			DataGridViewRow^ row = gcnew DataGridViewRow();
-			row->CreateCells(dataGridView1);
+		//array<System::String^>^ teacherArray = teacherString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+		//int count = 0;
+		//for (int i = 0; i < 2; i++) {
+		//	DataGridViewRow^ row = gcnew DataGridViewRow();
+		//	row->CreateCells(dataGridView1);
 
-			row->Cells[0]->Value = teacherArray[count];
-			row->Cells[1]->Value = teacherArray[count + 1];
-			row->Cells[2]->Value = teacherArray[count + 2];
-			row->Cells[3]->Value = teacherArray[count + 3];
+		//	row->Cells[0]->Value = teacherArray[count];
+		//	row->Cells[1]->Value = teacherArray[count + 1];
+		//	row->Cells[2]->Value = teacherArray[count + 2];
+		//	row->Cells[3]->Value = teacherArray[count + 3];
 
-			this->dataGridView1->Rows->Add(row);
-			count += 4;
-		}
+		//	this->dataGridView1->Rows->Add(row);
+		//	count += 4;
+		//}
+
+
 	}
 	private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 
 	}
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		TimetableM^ timetable = gcnew TimetableM();
-		std::vector<std::string> studentVector = timetable->timetable->studentTimetable();
-		System::Collections::Generic::List<System::String^>^ studentList = gcnew System::Collections::Generic::List<System::String^>();
+		//TimetableM^ timetable = gcnew TimetableM();
+		//std::vector<std::string> studentVector = timetable->timetable->studentTimetable();
+		//System::Collections::Generic::List<System::String^>^ studentList = gcnew System::Collections::Generic::List<System::String^>();
 
-		for (const std::string& teacher : studentVector) {
-			System::String^ teacherString = gcnew System::String(teacher.c_str());
-			studentList->Add(teacherString);
-		}
-		System::String^ studentString = String::Join(", ", studentList);
+		//for (const std::string& teacher : studentVector) {
+		//	System::String^ teacherString = gcnew System::String(teacher.c_str());
+		//	studentList->Add(teacherString);
+		//}
+		//System::String^ studentString = String::Join(", ", studentList);
+
+		//this->dataGridView1->Columns->Clear(); // Clear existing columns
+		//this->dataGridView1->Columns->Add("Student", "Student");
+		//this->dataGridView1->Columns->Add("Course", "Course");
+		//this->dataGridView1->Columns->Add("Time", "Time");
+		////this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Add("Room", "Room");
+
+		//array<System::String^>^ teacherArray = studentString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+		//int count = 0;
+		//int size = teacherArray->Length;
+		//for (int i = 0; i < size / 4; i++) {
+		//	DataGridViewRow^ row = gcnew DataGridViewRow();
+		//	row->CreateCells(dataGridView1);
+
+		//	row->Cells[0]->Value = teacherArray[count];
+		//	row->Cells[1]->Value = teacherArray[count + 1];
+		//	row->Cells[2]->Value = teacherArray[count + 2];
+		//	row->Cells[3]->Value = teacherArray[count + 3];
+
+		//	this->dataGridView1->Rows->Add(row);
+		//	count += 4;
+		//}
+
+		SqlConnection^ connection = gcnew SqlConnection("Data Source=DESKTOP-E19L0RG\\SQL;Initial Catalog=\"Timetable System\";Integrated Security=True");
+		connection->Open();
+		SqlCommand^ cmd = gcnew SqlCommand("SELECT [StudentName], [StudentEnrollment],[StudentEmail],[SectionName] FROM [Student]", connection);
+		SqlDataReader^ reader = cmd->ExecuteReader();
 
 		this->dataGridView1->Columns->Clear(); // Clear existing columns
-		this->dataGridView1->Columns->Add("Student", "Student");
-		this->dataGridView1->Columns->Add("Course", "Course");
-		this->dataGridView1->Columns->Add("Time", "Time");
-		//this->dataGridView1->Columns->Add("Time", "Time");
-		this->dataGridView1->Columns->Add("Room", "Room");
+		this->dataGridView1->Columns->Add("Student Name", "Student Name");
+		this->dataGridView1->Columns->Add("Email", "Email");
+		this->dataGridView1->Columns->Add("Enrollment", "Enrollment");
+		this->dataGridView1->Columns->Add("Section", "Section");
+		while (reader->Read())
+		{
+			String^ namedb = reader["StudentName"]->ToString();
+			String^ emaildb = reader["StudentEmail"]->ToString();
+			String^ enrolldb = reader["StudentEnrollment"]->ToString();
+			String^ sectiondb = reader["SectionName"]->ToString();
+			/*std::string namedbst = marshal_as<std::string>(namedb);
+			std::string emaildbst = marshal_as<std::string>(emaildb);
+			std::string enrolldbst = marshal_as<std::string>(enrolldb);
+			std::string sectiondbst = marshal_as<std::string>(sectiondb);*/
 
-		array<System::String^>^ teacherArray = studentString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
-		int count = 0;
-		int size = teacherArray->Length;
-		for (int i = 0; i < size / 4; i++) {
 			DataGridViewRow^ row = gcnew DataGridViewRow();
 			row->CreateCells(dataGridView1);
+			row->Cells[0]->Value = namedb;
+				row->Cells[1]->Value = emaildb;
+				row->Cells[2]->Value = enrolldb;
+				row->Cells[3]->Value = sectiondb;
 
-			row->Cells[0]->Value = teacherArray[count];
-			row->Cells[1]->Value = teacherArray[count + 1];
-			row->Cells[2]->Value = teacherArray[count + 2];
-			row->Cells[3]->Value = teacherArray[count + 3];
-
-			this->dataGridView1->Rows->Add(row);
-			count += 4;
+				this->dataGridView1->Rows->Add(row);
 		}
 	}
 	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {

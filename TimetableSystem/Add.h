@@ -628,7 +628,7 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	   }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	
-	SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+	SqlConnection^ con = gcnew SqlConnection("Data Source=DESKTOP-E19L0RG\\SQL;Initial Catalog=\"Timetable System\";Integrated Security=True");
 	con->Open();
 	
 	if (label3->Text == "Student")
