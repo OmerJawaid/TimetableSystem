@@ -410,7 +410,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	label7->Visible = false;
 	button4->Text = "Select Course";
 	label4->Text = "Select Course";
-	/*AddforComboboxCourse(comboBox2);*/
+	AddforComboboxCourse(comboBox2);
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	listView1->Visible = false;
@@ -425,6 +425,7 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 	  
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	
+	/*SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");*/
 	if (label4->Text == "Select Course")
 	{
 		label4->Text = "Remove Student";

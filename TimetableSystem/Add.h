@@ -63,7 +63,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/
-
+			ADDforComboboxStudent(comboBox1);
 		}
 
 	protected:

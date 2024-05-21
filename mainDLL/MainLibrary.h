@@ -57,7 +57,10 @@ public:
     std::string getCourseName() const {
         return courseName;
     }
-    int getCourseCode() const;
+    int getCourseCode() const
+    {
+        return courseCode;
+    }
     Teacher* getTeacher() const;
     Room* getAssignedRoom() const;
     Section* getAssignedSection() const { return assignedSection; }
@@ -96,7 +99,6 @@ public:
     void assignRoom(Course* course);
     bool checkAvailabitiy(std::string room_number);
     void update_room(Course* course);
-    void bookRoom();
     std::string getRoomNumber() const;
     int getcapacity() const;
 };

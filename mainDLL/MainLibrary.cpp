@@ -4,13 +4,7 @@
 
 using namespace std;
 
-vector<string>Test()
-{
-    vector<string>str;
-    str.push_back("Hello");
-    str.push_back("World");
-    return str;
-}
+
 bool login(string username, string password,string usernamedb,string passworddb)
 {
     if (usernamedb == username && passworddb == password)
@@ -22,7 +16,7 @@ bool login(string username, string password,string usernamedb,string passworddb)
 
     //Course class
 
-    /*void Course::addStudent(Student* student) {
+   /* void Course::addStudent(Student* student) {
         enrolledStudents.push_back(student);
     }*/
 
@@ -33,13 +27,9 @@ bool login(string username, string password,string usernamedb,string passworddb)
         }
     }
 
-    //std::string Course::getCourseName() const {
-    //    return courseName;
-    //}
-
-    int Course::getCourseCode() const {
-        return courseCode;
-    }
+    /*std::string Course::getCourseName() const {
+        return courseName;
+    }*/
 
     Teacher* Course::getTeacher() const {
         return teacher;
