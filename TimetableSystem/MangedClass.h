@@ -8,8 +8,10 @@ using namespace System::Collections::Generic;
 public ref class CourseM {
 	
 public:
+	int code;
 	Course* course;
 	CourseM(int courseCode, const std::string& coursename) {
+		code = courseCode;
 		course = new Course(courseCode,coursename);
 	}
 };

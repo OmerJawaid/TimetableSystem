@@ -549,7 +549,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = true;
 	comboBox3->Visible = false;
 	button6->Text = "Create Teacher";
-	button8->Visible = false;
+	button8->Visible = true;
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	AddforComboboxRoom(comboBox2);
@@ -568,7 +568,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox2->Visible = true;
 	comboBox3->Visible = true;
 	button6->Text = "Create Course";
-	button8->Visible = true;
+	button8->Visible = false;
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	ADDforComboboxStudent(comboBox1);
@@ -715,38 +715,56 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	}
 	else if (label3->Text == "Course")
 	{
-		
 		IntPtr ptr = Marshal::StringToHGlobalAnsi(textBox1->Text);
 		std::string name(static_cast<const char*>(ptr.ToPointer()));
 		Marshal::FreeHGlobal(ptr);
+
 		try {
-			int coursecode = Convert::ToInt32(textBox2->Text);
-			CourseM^ course1 = gcnew CourseM(coursecode, name);
+			int coursecode1 = Convert::ToInt32(textBox2->Text);
+			CourseM^ course1 = gcnew CourseM(coursecode1, name);
 			courses->Add(course1);
+
+			SqlTransaction^ transaction = nullptr;  // Declare the transaction variable outside the nested try block
+
 			try {
+				courseiterator = 0;
 				course1->course->teacherAssignCourse(teachers[courseiterator]->teacher);
 				course1->course->setAssignedRoom(rooms[courseiterator]->room);
-				
-				int teacherid = teachers[courseiterator]->teacher->getteacherid();
-				String^ RoomNumber = gcnew String(rooms[courseiterator]->room->getRoomNumber().c_str());
-				courseiterator++;
 
-				SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Course(Coursename, Coursecode, TeacherID, RoomNum) VALUES(@Coursename, @Coursecode, @TeacherID, @RoomNum)",con);
+				int teacherid = teachers[courseiterator]->teacher->getteacherid();
+				teachers[courseiterator]->teacher->assignCourse(course1->course);
+				String^ RoomNumber = gcnew String(rooms[courseiterator]->room->getRoomNumber().c_str());
+
+
+				//// Begin transaction
+				//transaction = con->BeginTransaction();
+				//SqlCommand^ cmdteacher = gcnew SqlCommand("UPDATE Teacher SET Coursecode = @Coursecode WHERE TeacherID = @TeacherID", con, transaction);
+				//cmdteacher->Parameters->AddWithValue("@CourseCode", course1->course->getCourseCode());
+				//cmdteacher->Parameters->AddWithValue("@TeacherID", teacherid);
+
+				SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Course(Coursename, Coursecode, TeacherID, RoomNum) VALUES(@Coursename, @Coursecode, @TeacherID, @RoomNum)", con, transaction);
 				cmd->Parameters->AddWithValue("@Coursename", textBox1->Text);
-				cmd->Parameters->AddWithValue("@Coursecode", coursecode);
+				cmd->Parameters->AddWithValue("@Coursecode", coursecode1);
 				cmd->Parameters->AddWithValue("@TeacherID", teacherid);
 				cmd->Parameters->AddWithValue("@RoomNum", RoomNumber);
+
+				/*cmdteacher->ExecuteNonQuery();*/
 				cmd->ExecuteNonQuery();
+
+				//transaction->Commit();  // Commit transaction
+				courseiterator++;
 			}
 			catch (System::Exception^ e) {
+				//if (transaction != nullptr) {
+				//	transaction->Rollback();  // Rollback transaction on error
+				//}
 				MessageBox::Show(e->Message);
 			}
 		}
-		catch (System::Exception^ e)
-		{
+		catch (System::Exception^ e) {
 			MessageBox::Show("Enter Course code");
 		}
-		
+
 		textBox1->Text = "";
 		textBox2->Text = "";
 		textBox3->Text = "";
@@ -857,11 +875,11 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, Sys
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (label3->Text == "Course")
+	if (label3->Text == "Teacher")
 	{
 		this->Hide();
-		MoreFunctionallityCourse^ CourseFunc;
-		CourseFunc = gcnew MoreFunctionallityCourse(students,courses);
+		MoreFunctionalityCourse^ CourseFunc;
+		CourseFunc = gcnew MoreFunctionalityCourse(students,courses);
 		CourseFunc->ShowDialog();
 	}
 	else if (label3->Text=="Student")

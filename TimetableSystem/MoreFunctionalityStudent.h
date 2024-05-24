@@ -1,5 +1,6 @@
 #pragma once
 #include"MangedClass.h"
+#include"DAL.h";
 #include"../mainDLL/MainLibrary.h"
 namespace TimetableSystem {
 
@@ -17,12 +18,15 @@ namespace TimetableSystem {
 	public ref class MoreFunctionalityStudent : public System::Windows::Forms::Form
 	{
 	public:
+		int StudentCourseID;
 		MoreFunctionalityStudent(List<StudentM^>^ students, List<CourseM^>^ courses)
 		{
 			this->students = students;
 			this->courses = courses;
 
 			InitializeComponent();
+			DAL^ dal = gcnew DAL();
+			StudentCourseID=dal->StudentCourseID();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -109,6 +113,7 @@ List<StudentM^>^ students = gcnew List<StudentM^>();
 			this->listBox1->Name = L"listBox1";
 			this->listBox1->Size = System::Drawing::Size(786, 82);
 			this->listBox1->TabIndex = 3;
+			this->listBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionalityStudent::listBox1_SelectedIndexChanged);
 			// 
 			// label2
 			// 
@@ -242,7 +247,7 @@ List<StudentM^>^ students = gcnew List<StudentM^>();
 			this->label4->ForeColor = System::Drawing::Color::White;
 			this->label4->Location = System::Drawing::Point(373, 110);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(166, 25);
+			this->label4->Size = System::Drawing::Size(155, 25);
 			this->label4->TabIndex = 38;
 			this->label4->Text = L"Enroll Course";
 			this->label4->Click += gcnew System::EventHandler(this, &MoreFunctionalityStudent::label4_Click);
@@ -257,7 +262,7 @@ List<StudentM^>^ students = gcnew List<StudentM^>();
 			this->label3->ForeColor = System::Drawing::Color::White;
 			this->label3->Location = System::Drawing::Point(428, 197);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(107, 16);
+			this->label3->Size = System::Drawing::Size(100, 16);
 			this->label3->TabIndex = 39;
 			this->label3->Text = L"Enroll Course";
 			// 
@@ -317,7 +322,6 @@ List<StudentM^>^ students = gcnew List<StudentM^>();
 			this->comboBox2->Size = System::Drawing::Size(209, 21);
 			this->comboBox2->TabIndex = 44;
 			this->comboBox2->SelectedIndexChanged += gcnew System::EventHandler(this, &MoreFunctionalityStudent::comboBox2_SelectedIndexChanged);
-			AddforComboboxStudent(comboBox2);
 			// 
 			// button4
 			// 
@@ -378,7 +382,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	comboBox3->Visible = false;
 	label7->Visible = false;
 	button4->Text = "Select Student";
-	label3->Text = "Select Student";
+	label3->Text = "Enroll Course";
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	listView1->Visible = false;
@@ -436,23 +440,23 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	else if (button4->Text == "Enroll Course")
 	{
 		try {
-			SqlCommand^ cmd = gcnew SqlCommand("Insert INTO Student(coursecode) VALUES(@coursecode) ", con);
 			con->Open();
-			int index = 0;
+			SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO StudentCourse(ID, StudentEnrollment, Coursecode) VALUES (@ID, @StudentEnrollment, @Coursecode)", con);
+			
 			for each (CourseM ^ course in courses) {
 				String^ name = comboBox3->SelectedItem->ToString();
 				String^ courseName = gcnew String(course->course->getCourseName().c_str());
-				if (name == courseName)
-				{
-					for each (StudentM ^ student in students)
-					{
+				if (name == courseName) {
+					for each (StudentM ^ student in students) {
 						String^ name = comboBox2->SelectedItem->ToString();
 						String^ studentName = gcnew String(student->student->getstudentname().c_str());
-
-						if (name == studentName)
-						{
+						StudentCourseID++;
+						if (name == studentName) {
 							student->student->enrollCourse(course->course);
-							cmd->Parameters->AddWithValue("@coursecode", course->course->getCourseCode());
+							cmd->Parameters->Clear();
+							cmd->Parameters->AddWithValue("@ID", StudentCourseID);
+							cmd->Parameters->AddWithValue("@CourseCode", course->course->getCourseCode());
+							cmd->Parameters->AddWithValue("@StudentEnrollment", student->student->studentID);
 							cmd->ExecuteNonQuery();
 							break;
 						}
@@ -460,10 +464,9 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 					break;
 				}
 			}
-			MessageBox::Show("Sucessfully Enrolled");
+			MessageBox::Show("Successfully Enrolled");
 		}
-		catch (Exception^ e)
-		{
+		catch (Exception^ e) {
 			MessageBox::Show(e->Message);
 		}
 	}
@@ -498,8 +501,6 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 		   // Create a list to dynamically add course names
 		   List<String^>^ courseNames = gcnew List<String^>();
 
-		   if (label4->Text == "Enroll Course" && button4->Text == "Select Student")
-		   {
 			   for each (CourseM ^ course in courses)
 			   {
 				   bool isEnrolled = false;
@@ -520,7 +521,7 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 					   courseNames->Add(gcnew System::String(course->course->getCourseName().c_str()));
 				   }
 			   }
-		   }
+		   
 
 		   // Add course names to the ComboBox
 		   if (courseNames->Count > 0)
@@ -555,6 +556,8 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void comboBox2_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void listBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

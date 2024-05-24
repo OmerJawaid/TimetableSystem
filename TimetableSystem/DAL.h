@@ -19,11 +19,7 @@ private:
 		return result;
 	}
 public:
-	DAL(List<CourseM^>^ coursesp,
-		List<TeacherM^>^ teachersp,
-		List<RoomM^>^ roomsp,
-		List<StudentM^>^ studentsp,
-		List<SectionM^>^ sectionsp)
+	DAL(List<CourseM^>^ coursesp, List<TeacherM^>^ teachersp, List<RoomM^>^ roomsp, List<StudentM^>^ studentsp, List<SectionM^>^ sectionsp)
 	{
 		courses = coursesp;
 		teachers = teachersp;
@@ -31,6 +27,9 @@ public:
 		students = studentsp;
 		sections = sectionsp;
 	}
+
+	DAL() {};
+
 	List<CourseM^>^ courses = gcnew List<CourseM^>();
 	List<TeacherM^>^ teachers = gcnew List<TeacherM^>();
 	List<RoomM^>^ rooms = gcnew List<RoomM^>();
@@ -139,7 +138,43 @@ public:
 					}
 				}
 			}
+			readerstudent->Close();
+
+			SqlCommand^ cmdstudentcourse = gcnew SqlCommand("SELECT [StudentEnrollment],[Coursecode] FROM [StudentCourse]", con);
+			SqlDataReader^ readerstudentcourse = cmdstudentcourse->ExecuteReader();
+			while (readerstudentcourse->Read())
+			{
+				int studentenrollment = readerstudentcourse->GetInt32(readerstudentcourse->GetOrdinal("StudentEnrollment"));
+				int coursecode = readerstudentcourse->GetInt32(readerstudentcourse->GetOrdinal("Coursecode"));
+				for each (auto studentc in students)
+				{
+					if (studentenrollment == studentc->student->studentID)
+					{
+						for each (auto coursec in courses)
+						{
+							if (coursecode == coursec->course->getCourseCode())
+							{
+								studentc->student->enrollCourse(coursec->course);
+								break;
+							}
+						}
+						break;
+					}
+				}
+			}
 		}
 		con->Close();
+			
+	}
+	int StudentCourseID()
+	{
+		int ID;
+		SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+		con->Open();
+		SqlCommand^ cmd= gcnew SqlCommand("SELECT [ID] FROM [StudentCourse]", con);
+		SqlDataReader^ readerstudent = cmd->ExecuteReader();
+		while (readerstudent->Read())
+			ID= readerstudent->GetInt32(readerstudent->GetOrdinal("ID"));
+		return ID;
 	}
 };

@@ -20,7 +20,7 @@ class Teacher;
 class Section;
 class Time;
 class Student;
-class Course {      //Managed class having errors after including public ref class
+class Course {
     int courseCode;
     std::string courseName;
     Room* assignedRoom;
@@ -31,9 +31,9 @@ class Course {      //Managed class having errors after including public ref cla
 
 public:
     std::vector<Student*> enrolledStudents;
-    Course(int courseCode, const std::string& coursename)
+    Course(int courseCode1, const std::string& coursename)
     {
-        courseCode = courseCode;
+        courseCode = courseCode1;
         courseName = coursename;
         assignedSection = nullptr;
         assignedTime = nullptr;
@@ -42,10 +42,10 @@ public:
         : courseCode(courseCode), courseName(courseName), teacher(teacher), assignedRoom(assignedRoom), assignedSection(nullptr), assignedTime(nullptr) {}
 
 
-
     void addStudent(Student* student) {
             enrolledStudents.push_back(student);
     }
+
     void removeStudent(Student* student) {
         auto it = find(enrolledStudents.begin(), enrolledStudents.end(), student);
         if (it != enrolledStudents.end()) {
@@ -67,10 +67,6 @@ public:
     void setAssignedSection(Section* section) {
         assignedSection = section;
     }
-
-  /*  Section* getAssignedSection() const {
-        return assignedSection;
-    }*/
     Time* getAssignedTime() const;
     /*void setAssignedSection(Section* section);*/
     void setAssignedRoom(Room* room) {
@@ -100,7 +96,7 @@ public:
     bool checkAvailabitiy(std::string room_number);
     void update_room(Course* course);
     std::string getRoomNumber() const;
-    int getcapacity() const;
+    /*int getcapacity() const;*/
 };
 
 class MainLibrary_API Section {
@@ -129,11 +125,12 @@ public:
 
 class MainLibrary_API Student {
 private:
-    int studentID;
+   
     std::string name, email, section;
 
 
 public:
+    int studentID;
     std::vector<Course*>coursesEnrolled;
     Student(int ID, std::string na, std::string mail);
     Student(int ID, std::string na, std::string mail, std::string Section);
@@ -142,6 +139,9 @@ public:
     void viewCourses(Course* course);
     std::string getstudentname();
     std::string getsection()const;
+    std::string getemail() {
+        return email;
+    }
     void AssignSection(Section* section);
 };
 
@@ -190,4 +190,4 @@ public:
 
 extern "C" MainLibrary_API bool login(std::string username, std::string password, std::string usernamedb, std::string passworddb);
 
-extern "C" MainLibrary_API std::vector<std::string>Test();
+//extern "C" MainLibrary_API std::vector<std::string>Test();
