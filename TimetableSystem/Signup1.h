@@ -317,7 +317,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	{
 		try
 		{
-			SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+			SqlConnection^ con = gcnew SqlConnection("Data Source=LAPTOP-0ILG8BPI;Initial Catalog=\"Timetable System\";Integrated Security=True");
 			con->Open();
 
 			SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Profile (username, password, name, age, role) VALUES (@username, @password, @name, @age, @role)", con);

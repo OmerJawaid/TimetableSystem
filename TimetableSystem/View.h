@@ -3,6 +3,7 @@
 #include<string>
 #include"../mainDll/MainLibrary.h"
 #include"MangedClass.h"
+#include<fstream>
 namespace TimetableSystem {
 
 	using namespace System;
@@ -14,6 +15,7 @@ namespace TimetableSystem {
 	using namespace System::Drawing;
 	using namespace Runtime::InteropServices;
 	using namespace System::Collections::Generic;
+	using namespace System::Data::SqlClient;
 
 
 	extern"C" {
@@ -68,29 +70,7 @@ namespace TimetableSystem {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::ListBox^ listBox2;
-
-
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	protected:
 
@@ -320,25 +300,33 @@ namespace TimetableSystem {
 		}
 		System::String^ teacherString = String::Join(", ", teacherList);
 
-		this->dataGridView1->Columns->Clear(); // Clear existing columns
-		this->dataGridView1->Columns->Add("Teacher", "Teacher");
-		this->dataGridView1->Columns->Add("CourseName", "Course Name");
-		this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Clear(); // Clear existing columns
+		//this->dataGridView1->Columns->Add("Teacher", "Teacher");
+		//this->dataGridView1->Columns->Add("CourseName", "Course Name");
 		//this->dataGridView1->Columns->Add("Time", "Time");
-		this->dataGridView1->Columns->Add("Room", "Room");
+		////this->dataGridView1->Columns->Add("Time", "Time");
+		//this->dataGridView1->Columns->Add("Room", "Room");
 
-		array<System::String^>^ teacherArray = teacherString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);
+		array<System::String^>^ teacherArray = teacherString->Split(gcnew array<System::String^> { ", " }, StringSplitOptions::None);		
+		SqlConnection^ con = gcnew SqlConnection("Data Source=LAPTOP-0ILG8BPI;Initial Catalog=\"Timetable System\";Integrated Security=True");
+		con->Open();
+		
 		int count = 0;
 		for (int i = 0; i < 2; i++) {
-			DataGridViewRow^ row = gcnew DataGridViewRow();
-			row->CreateCells(dataGridView1);
+		/*	SqlCommand^ cmd = gcnew SqlCommand("INSERT INTO Teacher Timetable(Teacher Name,Coursename,Time,Room) Values(@Teachername,@Coursename,@Time,@Room", con);
 
+			cmd->Parameters->AddWithValue("@Teachername", teacherArray[count]);
+			cmd->Parameters->AddWithValue("@Coursename", teacherArray[count + 1]);
+			cmd->Parameters->AddWithValue("@Time", teacherArray[count + 2]);
+			cmd->Parameters->AddWithValue("@Room", teacherArray[count + 3]);*/
+			/*DataGridViewRow^ row = gcnew DataGridViewRow();
+			row->CreateCells(dataGridView1);
 			row->Cells[0]->Value = teacherArray[count];
 			row->Cells[1]->Value = teacherArray[count + 1];
 			row->Cells[2]->Value = teacherArray[count + 2];
 			row->Cells[3]->Value = teacherArray[count + 3];
 
-			this->dataGridView1->Rows->Add(row);
+			this->dataGridView1->Rows->Add(row);*/
 			count += 4;
 		}
 	}

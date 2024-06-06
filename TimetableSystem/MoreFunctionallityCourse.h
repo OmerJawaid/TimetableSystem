@@ -25,8 +25,7 @@ namespace TimetableSystem {
 			this->courses = courses;
 
 			InitializeComponent();
-			DAL^ dal = gcnew DAL();
-			StudentCourseID = dal->StudentCourseID();
+			
 			//
 			//TODO: Add the constructor code here
 			//

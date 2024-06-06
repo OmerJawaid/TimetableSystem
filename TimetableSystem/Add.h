@@ -63,7 +63,7 @@ namespace TimetableSystem {
 			//
 			/*students = gcnew List<Student^>();*/
 	/*		courseList = gcnew List<Course^>();*/
-			ADDforComboboxStudent(comboBox1);
+ 		ADDforComboboxStudent(comboBox1);
 		}
 
 	protected:
@@ -628,7 +628,7 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	   }
 private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
 	
-	SqlConnection^ con = gcnew SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"Timetable System\";Integrated Security=True");
+	SqlConnection^ con = gcnew SqlConnection("Data Source=LAPTOP-0ILG8BPI;Initial Catalog=\"Timetable System\";Integrated Security=True");
 	con->Open();
 	
 	if (label3->Text == "Student")

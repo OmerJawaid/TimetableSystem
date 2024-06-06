@@ -26,7 +26,7 @@ namespace TimetableSystem {
 
 			InitializeComponent();
 			DAL^ dal = gcnew DAL();
-			StudentCourseID=dal->StudentCourseID();
+			/*StudentCourseID=dal->StudentCourseID();*/
 			//
 			//TODO: Add the constructor code here
 			//
